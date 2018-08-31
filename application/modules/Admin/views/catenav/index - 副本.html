@@ -1,0 +1,213 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<style>
+.macserch{
+	width:1300px;height:150px;
+}
+
+.macfont{
+	color:#000000;height:25px;font-size:13px;
+}
+
+.macbutton{
+	color:#FFFFFF;border:1px #009dd9 solid;padding:4px 10px; background:#009dd9;border-radius:15px;
+}
+
+.fixed-table-loading{ display:none; }
+</style>
+<section id="main" data-layout="layout-1">
+    <div class="modal fade" id="m-ud-article" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="top:200px">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						请输入操作说明
+					</h4>
+				</div>
+				
+				<form id="addform" method="post">
+					<div class="form-group">
+                        <label class="col-sm-2 control-label">所属级别</label>
+                        <div class="col-sm-10">
+                            <select class="selectpicker" id="sl_roles">
+                                <?php foreach($menu as $key => $val){?>
+                                <option value="<?php echo $val['id']; ?>"><?php echo $val['name']; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name" name="name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ICON</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="icon" name="icon">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">URL</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="url" name="url">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">排序</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="level" name="level">
+						</div>
+					</div>
+				</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-insert">确认</button>
+					<button type="button" class="btn btn-reset" data-dismiss="modal">取消</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	
+	
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>左侧栏目管理 <small>左侧栏目管理.</small></h2>
+                </div>
+				
+				
+                <div class="table-responsive">
+					<div id="toolbar" class="btn-group">
+			            <button id="btn_add" type="button" class="btn but_add">
+			                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+			            </button>
+			        </div>
+                    <table id="data-table-mac">
+                        <!--<thead>
+                        <tr>
+                            <th data-field="id" name='id'>编号</th>
+                            <th data-field="name" name='name'>名称</th>
+                            <th data-field="icon" name='icon'>icon</th>
+                            <th data-field="url" name='url'>url</th>
+                            <th data-field="level" name='level'>排序</th>
+                            <th data-field="c_time" name='c_time'>时间</th>
+                            <th data-field="uid" name='uid'>操作人</th>
+                            <th data-field="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>-->
+                    </table>
+                </div>
+				<div id="example" style="text-align: center">
+					<ul id="pageLimit"></ul>
+				</div>	
+            </div>
+        </div>
+    </section>
+</section>
+
+
+<script src="core/jquery-2.2.3.min.js"></script>
+<script src="core/bootstrap.min.js"></script>
+<script src="/widget/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<script src="core/bootstrap-table.min.js"></script>
+
+<script>
+$(function () {
+
+    //1.初始化Table
+    var oTable = new TableInit();
+    oTable.Init();
+
+    //2.初始化Button的点击事件
+    var oButtonInit = new ButtonInit();
+    oButtonInit.Init();
+
+});
+
+
+var TableInit = function () {
+    var oTableInit = new Object();
+    //初始化Table
+    oTableInit.Init = function () {
+        $('#data-table-mac').bootstrapTable({
+            url: '/admin/catenav/tabPage',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: false,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: oTableInit.queryParams,//传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            //pageNumber:1,                       //初始化加载第一页，默认第一页
+            //pageSize: 10,                       //每页的记录行数（*）
+            //pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            columns: [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: '编号'
+            }, {
+                field: 'name',
+                title: '名称'
+            }, {
+                field: 'icon',
+                title: 'icon'
+            }, {
+                field: 'url',
+                title: 'url'
+            }, ]
+        });
+    };
+
+  //得到查询的参数
+    oTableInit.queryParams = function (params) {
+        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit,   //页面大小
+            offset: params.offset,  //页码
+            departmentname: $("#txt_search_departmentname").val(),
+            statu: $("#txt_search_statu").val()
+        };
+        return temp;
+    };
+    return oTableInit;
+};
+
+
+var ButtonInit = function () {
+    var oInit = new Object();
+    var postdata = {};
+
+    oInit.Init = function () {
+        //初始化页面上面的按钮事件
+    };
+
+    return oInit;
+};
+	
+	
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>

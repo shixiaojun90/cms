@@ -1,0 +1,400 @@
+2018-08-23 22:16:35 4096
+2018-08-23 22:16:35 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Ncsi.txt.php: No such file or directory
+2018-08-23 22:16:35 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:35 19
+2018-08-23 22:16:35 4096
+2018-08-23 22:16:35 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/HNAP1.php: No such file or directory
+2018-08-23 22:16:35 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:35 19
+2018-08-23 22:16:35 4096
+2018-08-23 22:16:35 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Hudson.php: No such file or directory
+2018-08-23 22:16:35 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:35 19
+2018-08-23 22:16:36 4096
+2018-08-23 22:16:36 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Script.php: No such file or directory
+2018-08-23 22:16:36 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:36 19
+2018-08-23 22:16:36 4096
+2018-08-23 22:16:36 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Sqlite.php: No such file or directory
+2018-08-23 22:16:36 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:36 19
+2018-08-23 22:16:36 4096
+2018-08-23 22:16:36 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Sqlitemanager.php: No such file or directory
+2018-08-23 22:16:36 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:36 19
+2018-08-23 22:16:37 4096
+2018-08-23 22:16:37 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/SQLiteManager.php: No such file or directory
+2018-08-23 22:16:37 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:37 19
+2018-08-23 22:16:37 4096
+2018-08-23 22:16:37 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/SQLite.php: No such file or directory
+2018-08-23 22:16:37 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:37 19
+2018-08-23 22:16:37 4096
+2018-08-23 22:16:37 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/SQlite.php: No such file or directory
+2018-08-23 22:16:37 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:37 19
+2018-08-23 22:16:38 4096
+2018-08-23 22:16:38 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Main.php.php: No such file or directory
+2018-08-23 22:16:38 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:38 19
+2018-08-23 22:16:38 4096
+2018-08-23 22:16:38 Yaf_Application::run(): There is no method sqliteAction in TestController
+2018-08-23 22:16:38 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:38 19
+2018-08-23 22:16:38 4096
+2018-08-23 22:16:38 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/SQLiteManager-1.2.4.php: No such file or directory
+2018-08-23 22:16:38 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:38 19
+2018-08-23 22:16:39 4096
+2018-08-23 22:16:39 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/AgSearch.php: No such file or directory
+2018-08-23 22:16:39 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:39 19
+2018-08-23 22:16:39 4096
+2018-08-23 22:16:39 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Phpmyadmin.php: No such file or directory
+2018-08-23 22:16:39 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:39 19
+2018-08-23 22:16:39 4096
+2018-08-23 22:16:39 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin.php: No such file or directory
+2018-08-23 22:16:39 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:39 19
+2018-08-23 22:16:40 4096
+2018-08-23 22:16:40 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PMA.php: No such file or directory
+2018-08-23 22:16:40 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:40 19
+2018-08-23 22:16:40 4096
+2018-08-23 22:16:40 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Pma.php: No such file or directory
+2018-08-23 22:16:40 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:40 19
+2018-08-23 22:16:40 4096
+2018-08-23 22:16:40 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Dbadmin.php: No such file or directory
+2018-08-23 22:16:40 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:40 19
+2018-08-23 22:16:41 4096
+2018-08-23 22:16:41 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Mysql.php: No such file or directory
+2018-08-23 22:16:41 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:41 19
+2018-08-23 22:16:41 4096
+2018-08-23 22:16:41 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Myadmin.php: No such file or directory
+2018-08-23 22:16:41 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:41 19
+2018-08-23 22:16:41 4096
+2018-08-23 22:16:41 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Openserver.php: No such file or directory
+2018-08-23 22:16:41 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:41 19
+2018-08-23 22:16:42 4096
+2018-08-23 22:16:42 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Phpmyadmin2.php: No such file or directory
+2018-08-23 22:16:42 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:42 19
+2018-08-23 22:16:42 4096
+2018-08-23 22:16:42 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin2.php: No such file or directory
+2018-08-23 22:16:42 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:42 19
+2018-08-23 22:16:42 4096
+2018-08-23 22:16:42 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.php: No such file or directory
+2018-08-23 22:16:42 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:42 19
+2018-08-23 22:16:43 4096
+2018-08-23 22:16:43 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Php-my-admin.php: No such file or directory
+2018-08-23 22:16:43 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:43 19
+2018-08-23 22:16:43 4096
+2018-08-23 22:16:43 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.2.3.php: No such file or directory
+2018-08-23 22:16:43 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:43 19
+2018-08-23 22:16:43 4096
+2018-08-23 22:16:43 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.2.6.php: No such file or directory
+2018-08-23 22:16:43 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:43 19
+2018-08-23 22:16:44 4096
+2018-08-23 22:16:44 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.1.php: No such file or directory
+2018-08-23 22:16:44 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:44 19
+2018-08-23 22:16:44 4096
+2018-08-23 22:16:44 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.4.php: No such file or directory
+2018-08-23 22:16:44 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:44 19
+2018-08-23 22:16:44 4096
+2018-08-23 22:16:44 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.5-rc1.php: No such file or directory
+2018-08-23 22:16:44 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:44 19
+2018-08-23 22:16:45 4096
+2018-08-23 22:16:45 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.5-rc2.php: No such file or directory
+2018-08-23 22:16:45 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:45 19
+2018-08-23 22:16:45 4096
+2018-08-23 22:16:45 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.5.php: No such file or directory
+2018-08-23 22:16:45 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:45 19
+2018-08-23 22:16:45 4096
+2018-08-23 22:16:45 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.5-pl1.php: No such file or directory
+2018-08-23 22:16:45 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:45 19
+2018-08-23 22:16:46 4096
+2018-08-23 22:16:46 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.6-rc1.php: No such file or directory
+2018-08-23 22:16:46 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:46 19
+2018-08-23 22:16:46 4096
+2018-08-23 22:16:46 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.6-rc2.php: No such file or directory
+2018-08-23 22:16:46 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:46 19
+2018-08-23 22:16:46 4096
+2018-08-23 22:16:46 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.6.php: No such file or directory
+2018-08-23 22:16:46 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:46 19
+2018-08-23 22:16:47 4096
+2018-08-23 22:16:47 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.7.php: No such file or directory
+2018-08-23 22:16:47 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:47 19
+2018-08-23 22:16:47 4096
+2018-08-23 22:16:47 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.5.7-pl1.php: No such file or directory
+2018-08-23 22:16:47 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:47 19
+2018-08-23 22:16:47 4096
+2018-08-23 22:16:47 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-alpha.php: No such file or directory
+2018-08-23 22:16:47 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:47 19
+2018-08-23 22:16:48 4096
+2018-08-23 22:16:48 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-alpha2.php: No such file or directory
+2018-08-23 22:16:48 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:48 19
+2018-08-23 22:16:48 4096
+2018-08-23 22:16:48 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-beta1.php: No such file or directory
+2018-08-23 22:16:48 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:48 19
+2018-08-23 22:16:48 4096
+2018-08-23 22:16:48 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-beta2.php: No such file or directory
+2018-08-23 22:16:48 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:48 19
+2018-08-23 22:16:49 4096
+2018-08-23 22:16:49 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-rc1.php: No such file or directory
+2018-08-23 22:16:49 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:49 19
+2018-08-23 22:16:49 4096
+2018-08-23 22:16:49 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-rc2.php: No such file or directory
+2018-08-23 22:16:49 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:49 19
+2018-08-23 22:16:49 4096
+2018-08-23 22:16:49 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-rc3.php: No such file or directory
+2018-08-23 22:16:49 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:49 19
+2018-08-23 22:16:50 4096
+2018-08-23 22:16:50 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0.php: No such file or directory
+2018-08-23 22:16:50 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:50 19
+2018-08-23 22:16:50 4096
+2018-08-23 22:16:50 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-pl1.php: No such file or directory
+2018-08-23 22:16:50 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:50 19
+2018-08-23 22:16:50 4096
+2018-08-23 22:16:50 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-pl2.php: No such file or directory
+2018-08-23 22:16:50 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:50 19
+2018-08-23 22:16:50 4096
+2018-08-23 22:16:50 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.0-pl3.php: No such file or directory
+2018-08-23 22:16:50 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:50 19
+2018-08-23 22:16:51 4096
+2018-08-23 22:16:51 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1-rc1.php: No such file or directory
+2018-08-23 22:16:51 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:51 19
+2018-08-23 22:16:51 4096
+2018-08-23 22:16:51 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1-rc2.php: No such file or directory
+2018-08-23 22:16:51 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:51 19
+2018-08-23 22:16:51 4096
+2018-08-23 22:16:51 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1.php: No such file or directory
+2018-08-23 22:16:51 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:51 19
+2018-08-23 22:16:52 4096
+2018-08-23 22:16:52 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1-pl1.php: No such file or directory
+2018-08-23 22:16:52 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:52 19
+2018-08-23 22:16:52 4096
+2018-08-23 22:16:52 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1-pl2.php: No such file or directory
+2018-08-23 22:16:52 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:52 19
+2018-08-23 22:16:52 4096
+2018-08-23 22:16:52 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.1-pl3.php: No such file or directory
+2018-08-23 22:16:52 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:52 19
+2018-08-23 22:16:53 4096
+2018-08-23 22:16:53 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.2-rc1.php: No such file or directory
+2018-08-23 22:16:53 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:53 19
+2018-08-23 22:16:53 4096
+2018-08-23 22:16:53 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.2-beta1.php: No such file or directory
+2018-08-23 22:16:53 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:53 19
+2018-08-23 22:16:53 4096
+2018-08-23 22:16:53 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.2-rc1.php: No such file or directory
+2018-08-23 22:16:53 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:53 19
+2018-08-23 22:16:54 4096
+2018-08-23 22:16:54 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.2.php: No such file or directory
+2018-08-23 22:16:54 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:54 19
+2018-08-23 22:16:54 4096
+2018-08-23 22:16:54 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.2-pl1.php: No such file or directory
+2018-08-23 22:16:54 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:54 19
+2018-08-23 22:16:54 4096
+2018-08-23 22:16:54 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.3.php: No such file or directory
+2018-08-23 22:16:54 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:54 19
+2018-08-23 22:16:55 4096
+2018-08-23 22:16:55 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.3-rc1.php: No such file or directory
+2018-08-23 22:16:55 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:55 19
+2018-08-23 22:16:55 4096
+2018-08-23 22:16:55 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.3.php: No such file or directory
+2018-08-23 22:16:55 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:55 19
+2018-08-23 22:16:55 4096
+2018-08-23 22:16:55 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.3-pl1.php: No such file or directory
+2018-08-23 22:16:55 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:55 19
+2018-08-23 22:16:56 4096
+2018-08-23 22:16:56 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4-rc1.php: No such file or directory
+2018-08-23 22:16:56 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:56 19
+2018-08-23 22:16:56 4096
+2018-08-23 22:16:56 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4-pl1.php: No such file or directory
+2018-08-23 22:16:56 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:56 19
+2018-08-23 22:16:56 4096
+2018-08-23 22:16:56 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4-pl2.php: No such file or directory
+2018-08-23 22:16:56 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:56 19
+2018-08-23 22:16:57 4096
+2018-08-23 22:16:57 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4-pl3.php: No such file or directory
+2018-08-23 22:16:57 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:57 19
+2018-08-23 22:16:57 4096
+2018-08-23 22:16:57 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4-pl4.php: No such file or directory
+2018-08-23 22:16:57 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:57 19
+2018-08-23 22:16:57 4096
+2018-08-23 22:16:57 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.6.4.php: No such file or directory
+2018-08-23 22:16:57 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:57 19
+2018-08-23 22:16:58 4096
+2018-08-23 22:16:58 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.7.0-beta1.php: No such file or directory
+2018-08-23 22:16:58 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:58 19
+2018-08-23 22:16:58 4096
+2018-08-23 22:16:58 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.7.0-rc1.php: No such file or directory
+2018-08-23 22:16:58 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:58 19
+2018-08-23 22:16:58 4096
+2018-08-23 22:16:58 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.7.0-pl1.php: No such file or directory
+2018-08-23 22:16:58 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:58 19
+2018-08-23 22:16:59 4096
+2018-08-23 22:16:59 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.7.0-pl2.php: No such file or directory
+2018-08-23 22:16:59 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:59 19
+2018-08-23 22:16:59 4096
+2018-08-23 22:16:59 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.7.0.php: No such file or directory
+2018-08-23 22:16:59 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:59 19
+2018-08-23 22:16:59 4096
+2018-08-23 22:16:59 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0-beta1.php: No such file or directory
+2018-08-23 22:16:59 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:16:59 19
+2018-08-23 22:17:00 4096
+2018-08-23 22:17:00 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0-rc1.php: No such file or directory
+2018-08-23 22:17:00 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:00 19
+2018-08-23 22:17:00 4096
+2018-08-23 22:17:00 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0-rc2.php: No such file or directory
+2018-08-23 22:17:00 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:00 19
+2018-08-23 22:17:00 4096
+2018-08-23 22:17:00 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0.php: No such file or directory
+2018-08-23 22:17:00 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:00 19
+2018-08-23 22:17:01 4096
+2018-08-23 22:17:01 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0.1.php: No such file or directory
+2018-08-23 22:17:01 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:01 19
+2018-08-23 22:17:01 4096
+2018-08-23 22:17:01 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0.2.php: No such file or directory
+2018-08-23 22:17:01 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:01 19
+2018-08-23 22:17:01 4096
+2018-08-23 22:17:01 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0.3.php: No such file or directory
+2018-08-23 22:17:01 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:01 19
+2018-08-23 22:17:02 4096
+2018-08-23 22:17:02 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.0.4.php: No such file or directory
+2018-08-23 22:17:02 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:02 19
+2018-08-23 22:17:02 4096
+2018-08-23 22:17:02 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.1-rc1.php: No such file or directory
+2018-08-23 22:17:02 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:02 19
+2018-08-23 22:17:02 4096
+2018-08-23 22:17:02 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.1.php: No such file or directory
+2018-08-23 22:17:02 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:02 19
+2018-08-23 22:17:03 4096
+2018-08-23 22:17:03 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PhpMyAdmin-2.8.2.php: No such file or directory
+2018-08-23 22:17:03 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:03 19
+2018-08-23 22:17:03 4096
+2018-08-23 22:17:03 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Sqlmanager.php: No such file or directory
+2018-08-23 22:17:03 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:03 19
+2018-08-23 22:17:03 4096
+2018-08-23 22:17:03 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Mysqlmanager.php: No such file or directory
+2018-08-23 22:17:03 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:03 19
+2018-08-23 22:17:04 4096
+2018-08-23 22:17:04 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/P.php: No such file or directory
+2018-08-23 22:17:04 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:04 19
+2018-08-23 22:17:04 4096
+2018-08-23 22:17:04 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/PMA2005.php: No such file or directory
+2018-08-23 22:17:04 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:04 19
+2018-08-23 22:17:04 4096
+2018-08-23 22:17:04 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Pma2005.php: No such file or directory
+2018-08-23 22:17:04 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:04 19
+2018-08-23 22:17:05 4096
+2018-08-23 22:17:05 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Phpmanager.php: No such file or directory
+2018-08-23 22:17:05 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:05 19
+2018-08-23 22:17:05 4096
+2018-08-23 22:17:05 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Php-myadmin.php: No such file or directory
+2018-08-23 22:17:05 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:05 19
+2018-08-23 22:17:06 4096
+2018-08-23 22:17:06 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Phpmy-admin.php: No such file or directory
+2018-08-23 22:17:06 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:06 19
+2018-08-23 22:17:06 4096
+2018-08-23 22:17:06 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Webadmin.php: No such file or directory
+2018-08-23 22:17:06 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:06 19
+2018-08-23 22:17:06 4096
+2018-08-23 22:17:06 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Sqlweb.php: No such file or directory
+2018-08-23 22:17:06 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:06 19
+2018-08-23 22:17:07 4096
+2018-08-23 22:17:07 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Websql.php: No such file or directory
+2018-08-23 22:17:07 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:07 19
+2018-08-23 22:17:07 4096
+2018-08-23 22:17:07 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Webdb.php: No such file or directory
+2018-08-23 22:17:07 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:07 19
+2018-08-23 22:17:07 4096
+2018-08-23 22:17:07 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Mysqladmin.php: No such file or directory
+2018-08-23 22:17:07 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:07 19
+2018-08-23 22:17:08 4096
+2018-08-23 22:17:08 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Mysql-admin.php: No such file or directory
+2018-08-23 22:17:08 /home/wwwroot/wallet/public/index.php
+2018-08-23 22:17:08 19

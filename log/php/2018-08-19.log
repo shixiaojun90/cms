@@ -1,0 +1,8 @@
+2018-08-19 11:57:17 4096
+2018-08-19 11:57:17 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Manager.php: No such file or directory
+2018-08-19 11:57:17 /home/wwwroot/wallet/public/index.php
+2018-08-19 11:57:17 19
+2018-08-19 23:57:02 4096
+2018-08-19 23:57:02 Yaf_Application::run(): Failed opening controller script /home/wwwroot/wallet/application/controllers/Manager.php: No such file or directory
+2018-08-19 23:57:02 /home/wwwroot/wallet/public/index.php
+2018-08-19 23:57:02 19

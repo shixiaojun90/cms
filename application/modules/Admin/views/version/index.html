@@ -1,0 +1,412 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+
+<section id="main" data-layout="layout-1">
+    <div class="modal fade" id="m-ud-article" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						请输入操作说明
+					</h4>
+				</div>
+				
+				<ul id="myTab" class="nav nav-tabs">
+				   <li class="active"><a href="#zhmsg" data-toggle="tab">简体中文</a></li>
+				   <li><a href="#enmsg" data-toggle="tab">英文</a></li>
+				   <li><a href="#kamsg" data-toggle="tab">韩文</a></li>
+				</ul>
+				
+				<form id="addform" method="post"  enctype="multipart/form-data">
+					<input type="hidden" name="MAX_FILE_SIZE" value="100000000" /> 
+					<input type="hidden" name="id" id="id">
+					<input type="hidden" name="zh[language_id]" value="1">
+					<input type="hidden" name="en[language_id]" value="2">
+					<input type="hidden" name="ka[language_id]" value="3">
+					
+					<div class="input-group">
+						<span class="input-group-addon">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</span>
+						<input type="text" class="form-control" name="version" id="version" placeholder="请输入版本号">
+					</div>
+					
+					<div class="input-group">
+						<span class="input-group-addon">生&nbsp;&nbsp;成&nbsp;&nbsp;号</span>
+						<input type="text" class="form-control" name="build" id="build" placeholder="请输入生成号">
+					</div>
+					
+					<div class="input-group">
+						<span class="input-group-addon">钱包地址</span>
+						<input type="text" class="form-control" name="url" id="url" placeholder="请输入钱包地址">
+					</div>
+					
+					<div class="modal-body" style="width:200px;position: relative;margin: 10px 0px 20px 50px;">
+						<span>状态</span>
+						<select name="status" style="width:100px;height:30px;" id="wtype"/>
+							<option value="0">编辑中</option>
+							<option value="1">关闭中</option>
+							<option value="2">审核通过</option>
+						</select>
+					</div>
+					
+					<div class="modal-body" style="width:200px;float:right;position: relative; margin:-60px 130px 20px 20px;">
+						<span>类型</span>
+						<select name="type" style="width:100px;height:30px;" id="wtype"/>
+							<option value="0">非强制更新</option>
+							<option value="1">强制全局更新</option>
+							<option value="2">局部更新</option>
+						</select>
+					</div>
+					
+					<!--<div class="input-group">
+						<span class="input-group-addon">URL</span>
+						<input type="text" class="form-control" name="url" id="url" disabled placeholder="请输入链接">
+					</div>-->
+					
+					<!--<div class="input-group">
+						<span class="input-group-addon">钱包文件</span>
+						<input type="file" id="file" name="upload">
+					</div>-->
+					
+					
+					<div id="myTabContent" class="tab-content" style="height: 350px;">
+						<div class="tab-pane fade in active" id="zhmsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="zhContent" name="zh[context]"/></textarea>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="enmsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="enContent" name="en[context]"/></textarea>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="kamsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="kaContent" name="ka[context]"/></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+				
+				<!--<div class="progress" style="height:20px;width:350px; margin-left: 25px;display: none;">
+					<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+						<span class="sr-only" style="position: relative;">0% Complete</span>
+					</div>
+				</div>-->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-insert">确认</button>
+					<button type="button" class="btn btn-reset" data-dismiss="modal">取消</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	
+	
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+    	<h2 id="roleinfo" style="margin-left: 500px;"></h2>
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>版本管理 <small>挖矿版本管理.</small></h2>
+                </div>
+				
+				
+                <div class="table-responsive">
+					<button id="but_add" type="button" class="btn but_add m-l-30">
+		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		            </button>
+                    <table id="data-table-mac" class="table table-striped" data-row-style="rowStyle">
+                        <thead>
+                        <tr>
+                            <th data-field="id" name='id'>编号</th>
+                            <th data-field="version" name='version'>版本号</th>
+							<th data-field="url" name='url'>URL</th>
+                            <th data-field="c_time" name='c_time'>创建时间</th>
+                            <th data-field="c_time" name='u_time'>修改时间</th>
+                            <th data-field="c_time" name='v_time'>审核时间</th>
+                            <th data-field="context" name='context'>更新内容</th>
+                            <th data-field="uid" name='uid'>操作人</th>
+                            <th data-field="verifyer" name='verifyer'>审核人</th>
+                            <th data-field="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+				<div id="example">
+					<ul id="pageLimit"></ul>
+				</div>	
+            </div>
+        </div>
+    </section>
+</section>
+
+
+<script src="core/jquery-2.2.3.min.js"></script>
+<script src="/widget/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<script src="core/bootstrap-table.min.js"></script>
+
+
+
+<script>
+	require(['pathCnf'],function (pathCnf) {
+		require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+			var $zhsummernote=$('.zhContent').summernote({
+				placeholder:'请填写中文描述',
+				height: 160,
+				lang: 'zh-CN',
+				callbacks: {
+					onImageUpload: function(files) {
+						sendFile($zhsummernote,files[0]);
+					}
+				}
+			});
+			
+			var $ensummernote=$('.enContent').summernote({
+				placeholder:'请填写英文描述',
+				height: 160,
+				lang: 'zh-CN',
+				callbacks: {
+					onImageUpload: function(files) {
+						sendFile($ensummernote,files[0]);
+					}
+				}
+			});
+			
+			var $kasummernote=$('.kaContent').summernote({
+				placeholder:'请填写韩文描述',
+				height: 160,
+				lang: 'zh-CN',
+				callbacks: {
+					onImageUpload: function(files) {
+						sendFile($kasummernote,files[0]);
+					}
+				}
+			});
+
+			//btn-default
+			$(".btn-reset").on('click',function (e) {
+				$("#addform")[0].reset();
+			});
+			
+			$("body").on('click',function (e) {
+				//添加按钮
+				$('.zhContent').val(Base64.encode($('.zhContent').summernote('code')));
+				$('.enContent').val(Base64.encode($('.enContent').summernote('code')));
+				$('.kaContent').val(Base64.encode($('.kaContent').summernote('code')));
+                if(e.target.className.indexOf('btn-insert')>0){
+                    var options={
+                        dataType:'json',
+						beforeSend:function () {
+							//$(".progress").show();
+							$(".btn-insert").html("正在上传请稍等");
+						},
+						uploadProgress:function(event,position,total,percentComplete){
+							 var percentVal = percentComplete + '%';
+							 $(".progress-bar").width(percentComplete + '%');
+							 $(".progress-bar").html(percentVal);
+							 $(".sr-only").html(percentComplete + '%');
+						},
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-ud-article").modal("hide");
+                                //$("#data-table-mac").bootgrid("reload");
+								$(".progress").hide();
+								$("#addform")[0].reset();
+								initable('init');
+                            }else if(data.code==1002) {
+								swal(data.msg);
+							}else if(data.code=='10000'){
+                                swal('没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        },
+						
+						complete:function () {
+							$(".btn-insert").html("确定");
+						},
+                    };
+					
+                    $("#addform").ajaxSubmit(options);
+                }
+			});
+			
+			$(".but_add").on('click',function(){
+				$("#addform").attr('action',"/admin/version/add");
+				$("#m-ud-article").modal('show');
+			});
+			
+			$(".but_update").on('click',function(){
+				var id=$(this).attr('data-row-id');
+				$("#addform").attr('action',"/admin/version/updateById");
+				$("#addform > #id").val(id);
+				$.ajax({
+					type: 'POST',
+					url: "/admin/version/getArticleById",
+					data: {"id":id},
+					async:true,
+					dataType:"json",
+					success:function (data) {
+						if(data.code==0) {
+							$('#addform #version').val(data.data.version);
+							$('#addform #url').val(data.data.url);
+							$('#addform #build').val(data.data.build);
+							$(".zhContent").summernote('code',Base64.decode(data.data.zhdata.context));
+							$(".enContent").summernote('code',Base64.decode(data.data.endata.context));
+							$(".kaContent").summernote('code',Base64.decode(data.data.kadata.context));
+							$("#m-ud-article").modal('show');
+						}else if(data.code=='10000') {
+							swal('没有权限,请联系管理员!');
+						}else {
+							swal('操作失败');
+						}
+					}
+				});
+			});
+				
+			$(".but_delete").on('click',function(){
+				var id=$(this).attr('data-row-id');
+				swal({
+					title: "你将要删除这个记录吗?",
+					text: "如果你删除了,将无法恢复!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "delete",
+					closeOnConfirm: false
+				}, function(){
+					$.ajax({
+						type:"post",
+						url:"/admin/version/delete",
+						data:{'id':id},
+						async:true,
+						dataType:'json',
+						beforeSend:function () {
+							$("#data-table-mac").ajax_loader({size:'pl-lg',color:'pls-green'});
+						},
+						complete:function () {
+							setTimeout(function () {
+								$("#data-table-mac").find('.ajax-loader').fadeOut();
+							},100);
+						},
+						success:function (data) {
+							if(data.code=='0'){
+								swal("已删除!", "当前新闻记录已删除.", "success");
+								initable('init');
+								//$("#data-table-mac").bootgrid("reload");
+							}else if(data.code=='10000'){
+								swal('没有权限,请联系管理员!');
+							}else{
+								swal('操作失败');
+							}
+						}
+					})
+
+				});
+			})
+		})
+	})
+	
+	function initable(gettype='init'){
+		var parems='';
+		if(gettype=='search'){ parems=$('#search').serialize(); }else{ parems="rowCount=10&current=1"}
+		$.ajax({
+			type:"post",
+			url:"/admin/version/tabPage",
+			data: parems,
+			async:true,
+			dataType:'json',
+			success:function (data) {
+				if(data.code==0){
+					var jsonData=data.data.data;
+					var current=data.data.current;
+					var total=data.data.total;
+					var rowCount=data.data.rowCount;
+					$('#data-table-mac').bootstrapTable('destroy').bootstrapTable({
+						data: jsonData,
+						search: false,
+			            searchAlign:"left",
+			            strictSearch: true,
+			            showColumns: true,
+			            showRefresh: true, 
+			            buttonsAlign:"left",
+			            toolbarAlign:"left",
+			            toolbar:"#but_add",
+			            onRefresh: function () {
+			                initable('init');
+			            },
+					});
+					initpage(gettype,current,total,rowCount);
+				}else if(data.code=='10000') {
+					$(".container").hide();
+					$("#roleinfo").html('没有权限,请联系管理员!');
+                }else {
+                    $("#roleinfo").html('操作失败!');
+                }
+			},
+			complete:function () {
+				$('#data-table-mac').bootstrapTable('hideLoading','none');
+			}
+		})
+	}
+	
+	initable('init');
+	
+
+	function initpage(gettype,currents,total,rowCount){
+		if(gettype=='search'){ search='1'; }else{ search='0'; }
+		$('#pageLimit').bootstrapPaginator({
+			currentPage: currents,//当前的请求页面。
+			totalPages: Math.ceil(total/rowCount),//一共多少页。
+			size:"normal",//应该是页眉的大小。
+			bootstrapMajorVersion: 5,//bootstrap的版本要求。
+			numberOfPages:5,//一页列出多少数据。
+			alignment:"left",
+			containerClass:"m-l-30",
+			itemContainerClass: function (type, page, current) {
+				return (page === current) ? "active" : "";
+			},
+			itemTexts: function (type, page, current) {
+				switch (type) {
+					case "first": return "首页";
+					case "prev": return "上页";
+					case "next": return "下页";
+					case "last": return "末页";
+					case "page": return page;
+				}
+			},
+			onPageClicked: function (event, originalEvent, type, page){
+				$.ajax({
+					url:"/admin/version/tabPage",
+					type:'POST',
+					data:{'current':page,'rowCount':<?php echo $offset; ?>,'search':search},
+					dataType:'JSON',
+					success:function (data) {
+						var jsonData=data.data.data;
+						$('#data-table-mac').bootstrapTable('destroy').bootstrapTable({
+							data: jsonData
+						});
+						//initpage(current,total,rowCount);
+					}
+				})
+			}
+			
+
+		});
+	}
+	
+	function commands(value,row,index){
+		var but_edit='<button id="btn_edit" type="button" class="btn but_update" data-row-id="'+row['id']+'" data-row-index="'+index+'"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</button>';
+		var but_del='<button id="btn_delete" type="button" class="btn but_delete" data-row-id="'+row['id']+'" data-row-index="'+index+'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</button>';
+		return but_del;
+	};
+	
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>

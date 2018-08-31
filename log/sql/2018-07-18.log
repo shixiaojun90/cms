@@ -1,0 +1,12 @@
+
+111.201.146.83 | 2018-07-18 22:12:45
+SQL: SELECT * FROM `aac_global` LIMIT 1
+Error: Table 'wallet.aac_global' doesn't exist
+LINE__________FUNCTION__________FILE______________________________________
+764________checkResult__________/home/wwwroot/wallet/application/library/core/Model.php
+345________Execute______________/home/wwwroot/wallet/application/library/core/Model.php
+366________Select_______________/home/wwwroot/wallet/application/library/core/Model.php
+20_________SelectOne____________/home/wwwroot/wallet/application/model/M_Global.php
+56_________getGlobal____________/home/wwwroot/wallet/application/modules/Admin/controllers/Login.php
+___________checkLoginAction_____
+19_________run__________________/home/wwwroot/wallet/public/index.php

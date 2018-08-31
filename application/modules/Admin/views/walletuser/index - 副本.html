@@ -1,0 +1,391 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<style>
+.macserch{
+	width:1300px;height:150px;
+}
+
+.macfont{
+	color:#000000;height:25px;font-size:13px;
+}
+
+.macbutton{
+	color:#FFFFFF;border:1px #009dd9 solid;padding:4px 10px; background:#009dd9;border-radius:15px;
+}
+
+.fixed-table-loading{ display:none; }
+</style>
+<section id="main" data-layout="layout-1">
+    <div class="modal fade" id="m-ud-article" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="top:200px">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						请选择一条消息
+					</h4>
+				</div>
+				
+				<form id="addform" action="/admin/walletuser/updateById" method="post">
+					<input type="hidden" name="id" id="data-index">
+					<div class="col-sm-12">
+						<select id="msg" name="msg" onchange="getmsg(3);" class="selectpicker show-tick form-control">
+							<option value="0">请选择一条消息</option>
+							<?php foreach($msg as $key => $val){ ?>
+							<option value="<?php echo $val['id']; ?>"><?php echo $val['info']; ?></option>
+							<?php } ?>
+						</select>
+					</div>
+					<ul id="myTab" class="nav nav-tabs">
+					   <li class="active"><a href="#zhmsg" data-toggle="tab">简体中文</a></li>
+					   <li><a href="#enmsg" data-toggle="tab">英文</a></li>
+					   <li><a href="#kamsg" data-toggle="tab">韩文</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content" style="height: 350px;">
+						<div class="tab-pane fade in active" id="zhmsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="zhContent" name="zh[info]"/></textarea>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="enmsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="enContent" name="en[info]"/></textarea>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="kamsg">
+							<div class="modal-body">
+								<textarea type="text" id="input-description" class="kaContent" name="ka[info]"/></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+			<div class="modal-footer" style="position:relative;margin-top:150px;">
+				<button type="button" class="btn btn-insert">确认</button>
+				<button type="button" class="btn btn-reset" data-dismiss="modal">取消</button>
+			</div>
+		</div><!-- /.modal -->
+	</div>
+	
+	
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+    	<h2 id="roleinfo" style="margin-left: 500px;"></h2>
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>消息管理 <small>挖矿消息管理.</small></h2>
+                </div>
+				
+				<!--------搜索start-------->
+				<div class="macserch">
+					<form id="search">
+						<h5 style="margin-left:33px;">根据条件查询</h5><br>
+						<div style="float:left;margin-left:20px;">
+							<label class="macfont" style="width:85px;">MAC地址</label>
+							<input  id="ds_host" type="text" name="mac" placeholder="MAC地址" style="width:136px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:50px;">
+							<label class="macfont" style="width:121px;">历史提笔总金额</label>
+							<input  id="ds_host" type="text" name="conmoney" style="width:70px;"/>
+							<span>至</span>
+							<input  id="ds_host" type="text" name="" style="width:70px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:50px;">
+							<label class="macfont" style="width:82px;">挖矿余额</label>
+							<input  id="ds_host" type="text" name="balancestart" style="width:70px;"/>
+							<span>至</span>
+							<input  id="ds_host" type="text" name="balanceend" style="width:70px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:50px;">
+							<label class="macfont" style="width:70px;">工作量</label>
+							<input  id="ds_host" type="text" name="amountstart" style="width:70px;"/>
+							<span>至</span>
+							<input  id="ds_host" type="text" name="amountend" style="width:70px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:20px;margin-top:30px;">
+							<label class="macfont" style="width:82px;">创建时间</label>
+							<input  id="ds_host" type="text" name="ctimestart" style="width:70px;"/>
+							<span>至</span>
+							<input  id="ds_host" type="text" name="ctimeend" style="width:70px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:60px;margin-top:30px;">
+							<label class="macfont" style="width:82px;">今日奖励</label>
+							<input  id="ds_host" type="text" name="rewardstart" style="width:70px;"/>
+							<span>至</span>
+							<input  id="ds_host" type="text" name="rewardend" style="width:70px;"/>
+						</div>
+						
+						<div style="float:left;margin-left:60px;margin-top:30px;">
+							<label class="macfont" style="width:82px;">用户状态</label>
+							<select name="status">
+								<option value="0">正常</option>
+								<option value="1">冻结</option>
+							</select>
+						</div>
+						
+						<!--<div style="position:relative;float:right;">
+							<input type="button" value="导出EXCEL" class="macbutton" onclick="Excel();" style="width:100px;"/>
+						</div>-->
+						
+						<div style="float:left;margin-left:200px;margin-top:30px;">
+							<input type="button" value="查询" onclick="macfind()" class="macbutton" style="width:70px;"/>
+							<input type="hidden" value="1" name="search"/>
+							<input type="button" value="清空" class="macbutton" id="reset" style="width:70px;margin-left:20px"/>
+						</div>
+					</form>
+					
+					<div style="float:left;margin-left:10px;">
+						<form id="excelform" action="/admin/walletuser/excel" method="post">
+						<ul class="nav navbar-nav">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">导出EXCEL<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li onclick="Excel(0);"><a href="#">导出当前数据</a></li>
+									<li onclick="Excel(1);"><a href="#">导出全部数据</a></li>
+								</ul>
+							</li>
+						</ul>
+						</form>
+					</div>
+					
+                </div>
+				<!--------搜索end-------->
+				
+                <div class="table-responsive">
+                    <table id="data-table-mac" class="table table-striped" data-row-style="rowStyle">
+                        <thead>
+                        <tr>
+                            <th data-field="id" name='id'>编号</th>
+                            <th data-field="time" name='time'>创建时间</th>
+                            <th data-field="mac" name='mac'>MAC地址</th>
+                            <th data-field="amount" name='amount'>历史提币总金额</th>
+                            <th data-field="balance" name='balance'>挖矿余额</th>
+							<th data-field="award" name='award'>今日奖励</th>
+							<th data-field="workload" name='workload'>工作量</th>
+							<th data-field="status" name='status'>状态</th>
+                            <th data-field="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+				<div id="example" style="text-align: center">
+					<ul id="pageLimit"></ul>
+				</div>	
+            </div>
+        </div>
+    </section>
+</section>
+
+
+<script src="core/jquery-2.2.3.min.js"></script>
+<script src="core/bootstrap.min.js"></script>
+<script src="/widget/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<script src="core/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="/widget/excel/ExcelUtil.js"></script>
+
+<script>
+	require(['pathCnf'],function (pathCnf) {
+		require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+			$('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+			
+			var $zhsummernote=$('.zhContent').summernote({
+				placeholder:'请填写中文描述',
+				height: 160,
+				lang: 'zh-CN',
+				
+			});
+			
+			var $ensummernote=$('.enContent').summernote({
+				placeholder:'请填写英文描述',
+				height: 160,
+				lang: 'zh-CN',
+				
+			});
+			
+			var $kasummernote=$('.kaContent').summernote({
+				placeholder:'请填写韩文描述',
+				height: 160,
+				lang: 'zh-CN',
+				
+			});
+			
+			//btn-default
+			$(".btn-reset").on('click',function (e) {
+				$("#addform")[0].reset();
+			})
+			
+
+			$("body").on('click',function (e) {
+				//添加按钮
+				$('.zhContent').val(Base64.encode($('.zhContent').summernote('code')));
+				$('.enContent').val(Base64.encode($('.enContent').summernote('code')));
+				$('.kaContent').val(Base64.encode($('.kaContent').summernote('code')));
+				var index = $("#addform > #data-index").val();
+                if(e.target.className.indexOf('btn-insert')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            $("#addform")[0].reset();
+                            if(data.code=='0'){
+                                $("#m-ud-article").modal("hide");
+								$("#data-table-mac > tbody > tr[data-index="+index+"]").remove();
+                                //$("#data-table-mac").bootgrid("reload");
+								//initable('init');
+                            }else if(data.code==1002) {
+								swal(data.msg);
+							}else if(data.code=='3'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+					
+                    $("#addform").ajaxSubmit(options);
+                }
+			})
+		})
+	})
+	
+	function initable(gettype='init'){
+		var parems='';
+		if(gettype=='search'){ parems=$('#search').serialize(); }else{ parems="rowCount=10&current=1"}
+		$.ajax({
+			type:"post",
+			url:"/admin/walletuser/tabPage",
+			data: parems,
+			async:true,
+			dataType:'json',
+			success:function (data) {
+				if(data.code==0){
+					var jsonData=data.data.data;
+					var current=data.data.current;
+					var total=data.data.total;
+					var rowCount=data.data.rowCount;
+					$('#data-table-mac').bootstrapTable('destroy').bootstrapTable({
+						data: jsonData
+					});
+					initpage(gettype,current,total,rowCount);
+				}else if(data.code=='10000') {
+					$(".container").hide();
+					$("#roleinfo").html('没有权限,请联系管理员!');
+                }else {
+                    $("#roleinfo").html('操作失败!');
+                }
+			},
+		})
+	}
+	
+	initable('init');
+			
+	//function macfind(){
+	//	initable('search');
+	//};
+
+	function initpage(gettype,currents,total,rowCount){
+		if(gettype=='search'){ search='1'; }else{ search='0'; }
+		$('#pageLimit').bootstrapPaginator({
+			currentPage: currents,//当前的请求页面。
+			totalPages: total,//Math.ceil(total/rowCount),//一共多少页。
+			size:"normal",//应该是页眉的大小。
+			bootstrapMajorVersion: 5,//bootstrap的版本要求。
+			alignment:"right",
+			numberOfPages:5,//一页列出多少数据。
+			itemTexts: function (type, page, current) {
+				switch (type) {
+					case "first": return "首页";
+					case "prev": return "上页";
+					case "next": return "下页";
+					case "last": return "末页";
+					case "page": return page;
+				}
+			},
+			onPageClicked: function (event, originalEvent, type, page){
+				$.ajax({
+					url:"/admin/walletuser/tabPage",
+					type:'POST',
+					data:{'current':page,'rowCount':<?php echo $offset; ?>,'search':search},
+					dataType:'JSON',
+					success:function (data) {
+						var jsonData=data.data.data;
+						$('#data-table-mac').bootstrapTable('destroy').bootstrapTable({
+							data: jsonData
+						});
+						//initpage(current,total,rowCount);
+					}
+				})
+			}
+			
+
+		});
+	}
+			
+	function commands(value,row,index){
+		return '<a href="javascript:;" style="color:red" data-row-id="'+row['id']+'" onclick=\'showmodel("3",'+index+');\'>冻结</a>';//onclick=\'sendinfo("'+row['id']+'");\'
+	};
+	
+	function addinfo(){
+		$("#addform").attr('action',"/admin/walletmsg/add");
+		$("#m-ud-article").modal('show');
+	}
+	
+	function macfind(){
+		initable('search');
+	};
+	
+	
+	function showmodel(wtype,index){
+		$("#addform > #data-index").val(index);
+		$("#m-ud-article").modal('show');
+	}
+	
+	function getmsg(){
+		if($("#msg ").val() != 0){
+			$.ajax({
+				url:"/admin/walletuser/getArticleById",
+				type:'POST',
+				data:{'id':$("#msg ").val()},
+				dataType:'JSON',
+				success:function (data) {
+					$(".zhContent").summernote('code',Base64.decode(data.data.zhdata.info));
+					$(".enContent").summernote('code',Base64.decode(data.data.endata.info));
+					$(".kaContent").summernote('code',Base64.decode(data.data.kadata.info));
+				}
+			})
+		}
+		//$('#summernote').summernote('reset');
+		//$('#summernote').summernote('destroy');
+	}
+	
+	
+			
+	function Excel(type){
+		if(type==0){
+			ExcelUtils.exportExcel("data-table-mac");
+		}else{
+			$("#excelform").submit();
+		}
+	}
+	
+</script>
+<script>
+$(function(){
+	// 默认显示
+	$(".dropdown-toggle").dropdown();
+});
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>

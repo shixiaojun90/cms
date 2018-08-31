@@ -1,0 +1,241 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+	<section id="content">
+		<h2 id="roleinfo" style="margin-left: 500px;"></h2>
+		<div class="container">
+			<div class="card">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#group" data-toggle="tab">全局设置</a></li>
+					<li><a href="#on" data-toggle="tab">正式接口地址</a></li>
+					<li><a href="#off" data-toggle="tab">测试接口地址</a></li>
+				</ul>
+				<form class="form-horizontal" id="addform" action="/admin/setting/save" method="post">
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="group">
+							<div class="tab-pane fade in active" id="group">
+								<ul id="myTab" class="nav nav-tabs">
+									<li class="active"><a href="#group" data-toggle="tab">正式和测试按钮</a></li>
+								</ul>
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">选择正式和测试</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<label class="radio-inline">
+											<input type="radio" name="wallet[onoff]" id="onoff-1" value="1" checked>正式
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="wallet[onoff]" id="onoff-0"  value="0">测试
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade in active" id="group">
+								<ul id="myTab" class="nav nav-tabs">
+									<li class="active"><a href="#group" data-toggle="tab">账号设置</a></li>
+								</ul>
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">walletKey</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<input class="form-control" id="walletKey" type="text" name="wallet[walletKey]" value="<?php echo $setting['walletKey'];?>" placeholder="walletKey"/>
+									</div>
+								</div>
+								
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">walletSecret</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<input class="form-control" id="walletSecret" type="text" name="wallet[walletSecret]" value="<?php echo $setting['walletSecret'];?>" placeholder="walletSecret"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="tab-pane fade in active" id="group">
+								<ul id="myTab" class="nav nav-tabs">
+									<li class="active"><a href="#group" data-toggle="tab">分页设置</a></li>
+								</ul>
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">每页显示条数</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<input class="form-control" id="offset" type="text" name="wallet[offset]" value="<?php echo $setting['offset'];?>" placeholder="每页显示条数"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane fade" id="on">
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">用户管理地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="useronurl" type="text" name="wallet[useronurl]" placeholder="用户管理"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">提币审核列表地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="verifylistonurl" type="text" name="wallet[verifylistonurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">提币审核通过地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="verifyconsentonurl" type="text" name="wallet[verifyconsentonurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">提币审核驳回地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="verifyrejectonurl" type="text" name="wallet[verifyrejectonurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">提币查询地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="findonurl" type="text" name="wallet[findonurl]" placeholder="提币查询"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">公告消息地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="msgonurl" type="text" name="wallet[msgonurl]" placeholder="公告消息"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">版本管理地址</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="versiononurl" type="text" name="wallet[versiononurl]" placeholder="版本管理"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">邮件消息接口</label>
+								<div class="col-sm-4" style="width: 90%;">
+									<input class="form-control" id="emailonurl" type="text" name="wallet[emailonurl]" placeholder="版本管理"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane fade" id="off">
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">用户管理测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="useroffurl" type="text" name="wallet[useroffurl]" placeholder="用户管理"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">提币审核列表测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="verifylistoffurl" type="text" name="wallet[verifylistoffurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">提币审核通过测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="verifyconsentoffurl" type="text" name="wallet[verifyconsentoffurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">提币审核驳回测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="verifyrejectoffurl" type="text" name="wallet[verifyrejectoffurl]" placeholder="提币审核"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">提币查询测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="findoffurl" type="text" name="wallet[findoffurl]" placeholder="提币查询"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">公告消息测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="msgoffurl" type="text" name="wallet[msgoffurl]" placeholder="公告消息"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">版本管理测试地址</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="versionoffurl" type="text" name="wallet[versionoffurl]" placeholder="版本管理"/>
+								</div>
+							</div>
+							<div class="form-group" style="margin-right: 0px;">
+								<label class="col-sm-2 control-label" for="ds_host" style="width: 12%;">邮件消息测试接口</label>
+								<div class="col-sm-4" style="width: 85%;">
+									<input class="form-control" id="emailoffurl" type="text" name="wallet[emailoffurl]" placeholder="版本管理"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				
+				
+				<input type="button" id="submitBtn" class="btn btn-primary btn-lg btn-insert" style="margin-left: auto;margin-right: auto;float: none;display: block;" value="保存">
+			</div>
+		</div>
+	</section>
+    
+</section>
+
+<script>
+    //全局变量
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+            
+            $("body").on('click',function (e) {
+                //添加按钮
+                if(e.target.className.indexOf('btn-insert')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            if(data.code=='0'){
+                            	ini_setting();
+                            	swal(data['msg']);
+                            }else if(data.code=='10000') {
+                                swal('没有权限,请联系管理员!');
+                            }else {
+                                swal('操作失败1');
+                            }
+                        }
+                    };
+                    $("#addform").ajaxSubmit(options);
+                }
+            })
+        });
+    });
+    
+    function ini_setting(){
+    	$.ajax({
+			type:"post",
+			url:"/admin/setting/tabPage",
+			data: {},
+			async:true,
+			dataType:'json',
+			
+			success:function (data) {
+				if(data.code==0){
+					$.each(data.data,function(k,v){
+						if(v.name=="onoff"){
+							$("#onoff-"+v.value).attr("checked",true);
+						}
+						
+						$("#addform #"+v.name).val(v.value);
+					})
+				}else if(data.code=='10000') {
+					$(".container").hide();
+					$("#roleinfo").html('没有权限,请联系管理员!');
+                }else {
+                    $("#roleinfo").html('操作失败!');
+                }
+			}
+		})
+    }
+    ini_setting();
+    
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>
