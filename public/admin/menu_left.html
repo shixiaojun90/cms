@@ -1,0 +1,55 @@
+<div class="profile-menu">
+    <a href="">
+        <div class="profile-pic">
+            <img src="css/img/profile-pics/1.jpg" alt="">
+            <?php echo $_SESSION['user']['username'];?>
+        </div>
+
+        <div class="profile-info f-700">
+            当前项目 : <span id="this_project">请选择</span>
+            <i class="zmdi zmdi-caret-down"></i>
+        </div>
+    </a>
+
+    <ul class="main-menu" id="project_list">
+        <li>
+            <a href="javascript:;;">Logout</a>
+        </li>
+    </ul>
+</div>
+<ul class="main-menu" id="menu_list">
+    <?php $menu=$_SESSION['user']['menu'];?>
+
+    <?php foreach($menu as &$val){ ?>
+        <?php $child=0;?>
+        <?php $p_active=0;?>
+        <?php if($val['child']) {?>
+            <?php foreach($val['child'] as &$v) {?>
+                <?php preg_match('/\/([a-z]+)\?/',$v['url'],$rs); ?>
+                <?php if(strtoupper($rs[1])==strtoupper(Yaf_Dispatcher::getInstance()->getRequest()->controller)){?>
+                    <?php  $child=1;?>
+                <?php } ?>
+            <?php } ?>
+        <?php }else{ ?>
+            <?php preg_match('/\/([a-z]+)\?/',$val['parent']['url'],$rsp); ?>
+            <?php if(strtoupper($rsp[1])==strtoupper(Yaf_Dispatcher::getInstance()->getRequest()->controller)){?>
+                <?php  $p_active=1;?>
+            <?php } ?>
+        <?php }?>
+        <li data-id="<?php echo $val['parent']['id'] ?>" class="<?php echo ($val['child']?'sub-menu':'').($child?' toggled':'').($p_active?' sub-active':'');?>">
+            <a href="<?php echo $val['parent']['url'] ?>"><i class="<?php echo $val['parent']['icon'] ?>"></i><?php echo $val['parent']['name'] ?></a>
+            <?php if($val['child']) {?>
+                <ul style="display: <?php echo $child?'block':'none'; ?>;">
+                    <?php foreach($val['child'] as &$value) {?>
+                        <?php preg_match('/\/([a-z]+)\?/',$value['url'],$rs); ?>
+                        <?php if(strtoupper($rs[1])==strtoupper(Yaf_Dispatcher::getInstance()->getRequest()->controller)){?>
+                            <li class="sub-active"><a href="<?php echo $value['url']?>"><?php echo $value['name']?></a></li>
+                        <?php }else{ ?>
+                            <li><a href="<?php echo $value['url']?>"><?php echo $value['name']?></a></li>
+                        <?php }?>
+                    <?php }?>
+                </ul>
+            <?php }?>
+        </li>
+    <?php } ?>
+</ul>

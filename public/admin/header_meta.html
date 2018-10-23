@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>cms管理后台</title>
+    <meta name="keywords" content="cms" />
+    <meta name="description" content="cms"  />
+    <link href="<?php echo ADMIN_CSS_PATH ?>/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="<?php echo ADMIN_CSS_PATH ?>/common/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_CSS_PATH ?>/fixedCss.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_CSS_PATH ?>/app.css"/>
+    <script src="core/jquery-2.2.3.min.js"></script>
+    <script>
+        var HOST="http://<?php echo $_SERVER['HTTP_HOST']?>";
+        var ADMIN_CSS_PATH="<?php echo ADMIN_CSS_PATH ?>";
+        var ADMIN_CORE_PATH="<?php echo ADMIN_CORE_PATH ?>";
+        var ADMIN_JS_PATH="<?php echo ADMIN_JS_PATH?>";
+        var WIDGET_PATH="<?php echo WIDGET_PATH ?>";
+        var IMG_PATH="<?php echo IMG_PATH ?>";
+        var JS_PATH="<?php echo JS_PATH ?>";
+        var CSS_PATH="<?php echo CSS_PATH ?>";
+        var ACTION ="<?php echo Yaf_Dispatcher::getInstance()->getRequest()->action;?>";
+        var CONTROLLER ="<?php echo Yaf_Dispatcher::getInstance()->getRequest()->controller;?>";
+    </script>
+	
+    <script src="core/require.js" data-main="core/main.js"></script>
+	
+</head>
+<body class="toggled sw-toggled">

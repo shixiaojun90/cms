@@ -1,0 +1,16 @@
+ul,li,ol{
+	list-style: none;
+}
+.openIM_outside{
+	padding-top: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+.openIM_inside li .input-group span{
+	font-size: 10px !important;
+}
+.openBtn{
+	display: block;
+	margin: 0 auto;
+	margin-top: 12px;
+}

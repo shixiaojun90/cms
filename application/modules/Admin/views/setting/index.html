@@ -1,0 +1,185 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>全局设置</h2>
+                </div>
+                <div class="table-responsive">
+					<ul id="myTab" class="nav nav-tabs">  
+						<li class="active">
+							<a href="#A" data-toggle="tab"><legend>产品信息设置</legend></a>
+						</li>
+						<!--<li><a href="#B" data-toggle="tab"><legend>邮箱设置</legend></a></li>-->
+					</ul>
+					  
+					<div id="myTabContent" class="tab-content">
+						<form class="form-horizontal" action="/admin/setting/set" id="addform" method="post">
+							<div class="tab-pane fade in active" id="A">  
+								<fieldset>
+									<div class="form-group" style="margin-right: 0px;">
+										<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">产品库存</label>
+										<div class="col-sm-4">
+											<input class="form-control" id="ds_host" type="text" name="product[quantity]" value="<?php echo $product['text'];?>" placeholder="产品库存"/>
+										</div>
+									</div>
+									
+									<!--<div class="form-group" style="margin-right: 0px;">
+										<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">限购数量</label>
+										<div class="col-sm-4">
+											<input class="form-control" id="ds_host" type="text" name="product[limit]" value="" placeholder="限购数量"/>
+										</div>
+									</div>-->
+									<!---------<div class="form-group" style="margin-right: 0px;">
+										<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">充值地址</label>
+										<div class="col-sm-4">
+											<input class="form-control" id="ds_host" type="text" name="pay[paytarget]" value="" placeholder="充值地址"/>
+										</div>
+									</div>---------->
+								</fieldset>
+							</div>
+							<!---------邮箱设置开始---------->
+							<!---------<div class="tab-pane fade in active" id="A">
+									<fieldset>
+									   <div class="form-group" style="margin-right: 0px;">
+										  <label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">邮箱服务器地址</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_host" type="text" name="email[host]" placeholder="邮箱服务器地址"/>
+										  </div>
+										  <label class="col-sm-2 control-label" for="ds_username" style="width: 9.666667%;">服务器端口</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_username" type="text" name="email[prot]" placeholder="服务器端口"/>
+										  </div>
+									   </div>
+									   <div class="form-group"  style="margin-right: 0px;">
+										  <label class="col-sm-2 control-label" for="ds_username" style="width: 9.666667%;">邮箱账号</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_username" type="text" name="email[username]" placeholder="邮箱账号"/>
+										  </div>
+										  <label class="col-sm-2 control-label" for="ds_password" style="width: 9.666667%;">密码</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_password" type="password" name="email[password]" placeholder="密码"/>
+										  </div>
+									   </div>
+									   <div class="form-group"  style="margin-right: 0px;">
+										  <label class="col-sm-2 control-label" for="ds_username" style="width: 9.666667%;">发件人昵称</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_username" type="text" name="email[nickname]" placeholder="发件人昵称"/>
+										  </div>
+										  <label class="col-sm-2 control-label" for="ds_password" style="width: 9.666667%;">发件人邮箱地址</label>
+										  <div class="col-sm-4">
+											 <input class="form-control" id="ds_password" type="password" name="email[address]" placeholder="发件人邮箱地址"/>
+										  </div>
+									   </div>
+									</fieldset>     
+								
+							</div>---------->
+							<!---------邮箱设置结束---------->
+							
+						</form>
+						<button type="button" id="submitBtn" class="btn btn-primary btn-lg btn-insert" style="margin-left: auto;margin-right: auto;float: none;display: block;">保存设置</button>
+					</div>
+                </div>
+				
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+    //全局变量
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+            $("#submitBtn").on('click',function (e) {
+                //添加按钮
+                //if(e.target.className.indexOf('btn-insert')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            $("#addform")[0].reset();
+                            if(data.code=='0'){
+                                swal(data.msg);
+								send_msg();
+								$("#ds_host").val(data.text);
+                            }else if(data.code=='1002'){
+                                swal(data.msg);
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#addform").ajaxSubmit(options);
+                //}
+            })
+        });
+    });
+	
+	
+	/*****websocket******/
+	var msg = document.getElementById("msg");
+	var wsServer = 'ws://aacapi.bchunk.com:8084';
+	var websocket = new WebSocket(wsServer);
+	websocket.onopen = function (evt) {
+
+	};
+	//onmessage 监听服务器数据推送
+	websocket.onmessage = function (evt) {
+		console.log('从服务器获取到的数据: ' + evt.data);
+	};
+	//监听连接关闭
+	websocket.onclose = function (evt) {
+		console.log("服务器拒绝");
+	};
+	//监听连接错误信息
+	websocket.onerror = function (evt, e) {
+		console.log('错误: ' + evt.data);
+	};
+	
+	function send_msg(){
+		websocket.send("1");
+		//向服务器发送数据
+	}
+	
+	
+    /*function sendFile($summernote,file,artId) {
+        oMyForm = new FormData();
+        oMyForm.append("file", file);
+        if(artId){
+            oMyForm.append("artId",artId);
+        }
+        oMyForm.append("type","1");
+        oMyForm.append("from","2");
+        var fileData = URL.createObjectURL(file);
+        $summernote.summernote('insertImage', fileData,function ($image) {
+            $.ajax({
+                url: "/admin/articleinfo/uploadimg",
+                data: oMyForm,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType:"json",
+                type: 'POST',
+                success: function(data){
+		    console.log('img',data);
+                    if(data.code==0) {
+                        $image.attr('src', data.data);
+                    }else if(data.code=='3') {
+                        swal('操作失败', '没有权限,请联系管理员!');
+                    }else {
+                        swal('操作失败');
+                    }
+					$("#myTabContent").bootgrid("reload");
+                }
+            });
+
+        });
+    }*/
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>

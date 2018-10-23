@@ -1,0 +1,454 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    <div class="modal fade" id="m-ud-article" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="ModalLabel">
+                        update news info
+                    </h4>
+                </div>
+                <div class="modal-body form-horizontal" style="height: 500px;overflow-y:auto;">
+                    <form action="/admin/enaac/updateById" id="updateform" method="post">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">ID</label>
+                            <label  class="col-sm-8 control-label" id="txt_uid" style="text-align: left;"></label>
+                            <input type="hidden" name="id">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="updateName" class="col-sm-3 control-label">NNAME</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" id="updateName" class="form-control input-sm" name="name" placeholder="NNAME">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateTitle" class="col-sm-3 control-label">News described</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" id="updateTitle" class="form-control input-sm" name="title" placeholder="News described">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateLevel" class="col-sm-3 control-label">Show Link Rating</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" id="updateLevel" class="form-control input-sm" name="level" placeholder="Show Link Rating">
+                                </div>
+                            </div>
+                        </div>
+						
+						<div class="form-group">
+                            <label for="sl_artType" class="col-sm-3 control-label">status</label>
+                            <div class="col-sm-8">
+                                <select class="selectpicker" id="status"  name="status">
+                                    <option value="0">be in preparation</option>
+                                    <option value="1">under review</option>
+                                    <option value="2">pass the audit</option>
+                                    <option value="3">Failure Audit</option>
+                                    <option value="4">delete</option>
+                                </select>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label for="updateKeywords" class="col-sm-3 control-label">keywordsnewskey nvarchar</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" id="updateKeywords" class="form-control input-sm" name="keyWords" placeholder="keywordsnewskey nvarchar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addContent" class="col-sm-3 control-label">News Content</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <div id="updateContent" class="html-edit">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect btn-update">update</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="m-add-article" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Add news
+                    </h4>
+                </div>
+                <div class="modal-body form-horizontal" style="height: 500px;overflow-y:auto;">
+                    <form action="/admin/enaac/add" id="addform" method="post">
+                        
+                        <div class="form-group">
+                            <label for="addName" class="col-sm-3 control-label">NNAME</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control input-sm" id="addName" name="name" placeholder="NNAME">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addTitle" class="col-sm-3 control-label">News described</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control input-sm" id="addTitle" name="title" placeholder="News described">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Level" class="col-sm-3 control-label">Show Link Rating</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" id="Level" class="form-control input-sm" name="level" placeholder="Show Link Rating">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addKeywords" class="col-sm-3 control-label">keywords</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control input-sm" id="addKeywords" name="keyWords" placeholder="keywords">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="addContent" class="col-sm-3 control-label">news content</label>
+                            <div class="col-sm-8">
+                                <div class="fg-line">
+                                    <div id="addContent" class="html-edit">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect btn-insert">add</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>News content list <small>Manage all news content and other operations.</small></h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="data-table-selection" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th data-column-id="id" data-order="desc" data-type="numeric" data-identifier="true">ID</th>
+                            <th data-column-id="name">NNAME</th>
+                            <th data-column-id="title" >describe</th>
+                            <th data-column-id="keywords">keyword</th>
+                            <th data-column-id="count">reading quantity</th>
+                            <th data-column-id="creater">founder</th>
+                            <th data-column-id="level">Show Link Rating</th>
+							<th data-column-id="status" data-formatter="status" data-sortable="false">status</th>
+							<th data-column-id="creater">auditor</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+    //全局变量
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+            var grid=$("#data-table-selection").bootgrid({
+                ajax: true,
+                post: function ()
+                {
+                    /* To accumulate custom parameter with the request object */
+                    return {
+                        id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
+                    };
+                },
+                selection: true,
+                multiSelect: true,
+                rowSelect: true,
+                keepSelection: true,
+                url: "/admin/enaac/tabPage",
+                responseHandler:function (data) {
+                    var ret={
+                        "current": data.data.current,
+                        "rowCount": data.data.rowCount,
+                        "rows":data.data.data,
+                        "total": data.data.total
+                    }
+                    return ret;
+                },
+                templates: {
+                    actions: '<div class="actions btn-group"><div class="dropdown btn-group"><button class="btn btn-default btn-add"><span class="zmdi zmdi-account-add zmdi-hc-fw"></span></button></div></div>',
+                    actionButton:'<div class="dropdown btn-group"><button class="btn btn-default"><span class="zmdi zmdi-refresh zmdi-hc-fw"></span></button></div>'
+                },
+                formatters: {
+					"status":function (column, row) {
+							var str='';
+							switch (row.status){
+								case '0':
+									str='be editing';
+									break;
+								case '1':
+									str='under review';
+									break;
+								case '2':
+									str='under review';
+									break;
+								case '3':
+									str='Failure Audit';
+									break;
+								case '4':
+									str='delete';
+									break;
+							}
+							return str;
+						},
+                    /*"nstatus":function (column, row) {
+                        var str='';
+                        console.log(row);
+                        switch (row.nstatus){
+                            case '0':
+                                str='BLANK';
+                                break;
+                            case '1':
+                                str='show';
+                                break;
+                        }
+                        return str;
+                    },*/
+                    "commands": function(column, row)
+                    {
+                        var btn_publish=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_publish\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-tv-alt-play zmdi-hc-fw\"></span></button>'; }?>");
+
+                        var btn_edit=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_update\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button>'; }?>");
+
+                        var btn_delete=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_delete\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>'; }?>");
+
+                        return "<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_search\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-search zmdi-hc-fw\"></span></button>"+btn_edit +btn_publish+btn_delete;
+                    }
+                }
+            }).on('loaded.rs.jquery.bootgrid',function () {
+                grid.find('.btn_update').on('click',function (e) {
+                    var target=e.target.tagName=="BUTTON"?$(e.target):$(e.target).parent();
+                    $('#txt_uid').text(target.attr('data-row-id'));
+                    $.ajax({
+                        type:"get",
+                        url:"/admin/enaac/getArticleById",
+                        data:{'id':target.attr('data-row-id')},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-article").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-article").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code==0){
+                                $("#updateform .fileinput-preview").html('');
+                                $('#updateform input[name=id]').val(data.data.id);
+                                $('#updateform input[name=name]').val(data.data.name);
+                                $('#updateform input[name=title]').val(data.data.title);
+                                $('#updateform input[name=level]').val(data.data.level);
+                                $('#updateform input[name=keyWords]').val(data.data.keywords);
+                                var $summernote=$('#updateContent').summernote({
+                                    height: 250,
+                                    lang: 'zh-CN',
+                                    callbacks: {
+                                        onImageUpload: function(files) {
+                                            sendFile($summernote,files[0],target.attr('data-row-id'));
+                                        }
+                                    }
+                                });
+                                $("#updateform .fileinput").removeClass('fileinput-new').addClass('fileinput-exists');
+                                $("#updateform .fileinput-preview").append('<img src="'+data.data.icon+'">').css('line-height','150px');
+                                $('#updateContent').summernote('code',Base64.decode(data.data.content));
+                            }
+
+                        }
+                    });
+                    $("#m-ud-article").modal('show');
+                });
+                grid.find('.btn_delete').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    swal({
+                        title: "Are you going to delete the news record?",
+                        text: "If you delete it, you won't recover!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "delete",
+                        closeOnConfirm: false
+                    }, function(){
+                        $.ajax({
+                            type:"post",
+                            url:"/admin/enaac/delete",
+                            data:{'id':id},
+                            async:true,
+                            dataType:'json',
+                            beforeSend:function () {
+                                $("#data-table-selection").ajax_loader({size:'pl-lg',color:'pls-green'});
+                            },
+                            complete:function () {
+                                setTimeout(function () {
+                                    $("#data-table-selection").find('.ajax-loader').fadeOut();
+                                },100);
+                            },
+                            success:function (data) {
+                                if(data.code=='0'){
+                                    swal("have deleted!", "The current news record has been deleted.", "success");
+                                    $("#data-table-selection").bootgrid("reload");
+                                }else if(data.code=='3'){
+                                    swal('operation failure','No permission, please contact the administrator!');
+                                }else{
+                                    swal('operation failure');
+                                }
+                            }
+                        })
+
+                    });
+                });
+                grid.find('.btn_search').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    window.open("../enaac/item?id="+id);
+                })
+            });
+            $("body").on('click',function (e) {
+                if(e.target.className.indexOf('btn-update')>0){
+                    var content=$('input[name=content]').val(Base64.encode($('#updateContent').summernote('code')));
+					console.log(content);
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-ud-article").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='3'){
+                                swal('operation failure','No permission, please contact the administrator!');
+                            }else{
+                                swal('operation failure');
+                            }
+                        }
+                    };
+                    $("#updateform").ajaxSubmit(options);
+                }
+//                m-add-article
+                //打开添加按钮
+                if(e.target.tagName=='BUTTON'||e.target.tagName=='SPAN'){
+                    if(e.target.className.indexOf('btn-add')>0||e.target.parentNode.className.indexOf('btn-add')>0){
+                        $("#m-add-article").modal("show");
+
+                        var $summernote=$('#addContent').summernote({
+                            height: 250,
+                            lang: 'zh-CN',
+                            callbacks: {
+                                onImageUpload: function(files) {
+                                    sendFile($summernote,files[0],articleId);
+                                }
+                            }
+                        });
+                        $("#sl_artType").selectpicker('val',0);
+                        $('#addContent').summernote('code','');
+                    }
+                }
+                //添加按钮
+                if(e.target.className.indexOf('btn-insert')>0){
+                    $('#hiddenContent').val(Base64.encode($('#updateContent').summernote('code')));
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            $("#addform")[0].reset();
+                            if(data.code=='0'){
+                                $("#m-add-article").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='3'){
+                                swal('operation failure','No permission, please contact the administrator!');
+                            }else{
+                                swal('operation failure');
+                            }
+                        }
+                    };
+                    $("#addform").ajaxSubmit(options);
+                }
+            })
+        });
+    });
+    function sendFile($summernote,file,artId) {
+        oMyForm = new FormData();
+        oMyForm.append("file", file);
+        if(artId){
+            oMyForm.append("artId",artId);
+        }
+        oMyForm.append("type","1");
+        oMyForm.append("from","2");
+        var fileData = URL.createObjectURL(file);
+        $summernote.summernote('insertImage', fileData,function ($image) {
+            $.ajax({
+                url: "/admin/enaac/uploadimg",
+                data: oMyForm,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType:"json",
+                type: 'POST',
+                success: function(data){
+		    console.log('img',data);
+                    if(data.code==0) {
+                        $image.attr('src', data.data);
+                    }else if(data.code=='3') {
+                         swal('operation failure','No permission, please contact the administrator!');
+                    }else {
+                        swal('operation failure');
+                    }
+                }
+            });
+
+        });
+    }
+</script>
+<?php include APP_PATH.'/public/admin/footer.html' ?>

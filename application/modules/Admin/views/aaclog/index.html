@@ -1,0 +1,326 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div id="myeditor"></div>
+            <div class="card">
+				<div class="card-header">
+                    <h2>aac转账日志 <small>aac转账日志操作.</small></h2>
+					<form action="/admin/aaclog/excel" method="post">
+					<div style="width: 200px;float: right;position: inherit;margin-top: -50px;"><input type="submit" value="导出Excel"></div>
+					<form>
+                </div>
+                <div class="card-header">
+                    <h2>转账日志 <small>转账日志操作.</small></h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="data-table-selection" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th data-column-id="id" data-order="desc" data-type="numeric" data-identifier="true">编号</th>
+                            <th data-column-id="uid">用户名</th>
+                            <th data-column-id="bname">订单编号</th>
+                            <th data-column-id="username">日志记录</th>
+							<th data-column-id="c_time"  data-formatter="c_time">时间</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+    //全局变量
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+            var grid=$("#data-table-selection").bootgrid({
+                ajax: true,
+                post: function ()
+                {
+                    /* To accumulate custom parameter with the request object */
+                    return {
+                        id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
+                    };
+                },
+                selection: true,
+                multiSelect: true,
+                rowSelect: true,
+                keepSelection: true,
+                url: "/admin/aaclog/tabPage",
+                responseHandler:function (data) {
+                    var ret={
+                        "current": data.data.current,
+                        "rowCount": data.data.rowCount,
+                        "rows":data.data.data,
+                        "total": data.data.total
+                    }
+                    return ret;
+                },
+                templates: {
+                    actions: '<div class="actions btn-group"><div class="dropdown btn-group"><button class="btn btn-default btn-add"><span class="zmdi zmdi-account-add zmdi-hc-fw"></span></button></div></div>',
+                    actionButton:'<div class="dropdown btn-group"><button class="btn btn-default"><span class="zmdi zmdi-refresh zmdi-hc-fw"></span></button></div>'
+                },
+                formatters: {
+					"c_time":function (column,row) {
+                        return new Date(parseInt(row['c_time']) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+                    },
+                    "status":function (column, row) {
+                        var str='';
+                        switch (row.status){
+                            case '0':
+                                str='交易中';
+                                break;
+                            case '1':
+                                str='已付款';
+                                break;
+                            case '2':
+                                str='配送中';
+                                break;
+                            case '3':
+                                str='已完成';
+                                break;
+							case '4':
+                                str='已撤销';
+                                break;
+                        }
+                        return str;
+                    },
+                    "commands": function(column, row)
+                    {
+                        var btn_publish=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_publish\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-tv-alt-play zmdi-hc-fw\"></span></button>'; }?>");
+
+                        var btn_edit=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_update\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button>'; }?>");
+
+                        var btn_delete=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_delete\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>'; }?>");
+
+                        return btn_delete;
+                    }
+                }
+            }).on('loaded.rs.jquery.bootgrid',function () {
+                grid.find('.btn_update').on('click',function (e) {
+                    var target=e.target.tagName=="BUTTON"?$(e.target):$(e.target).parent();
+                    $('#txt_uid').text(target.attr('data-row-id'));
+                    $.ajax({
+                        type:"get",
+                        url:"/admin/order/getArticleById",
+                        data:{'id':target.attr('data-row-id')},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-article").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-article").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code==0){
+                                $("#updateform .fileinput-preview").html('');
+                                $('#updateform input[name=id]').val(data.data.id);
+                                $('#updateform #upbname').val(data.data.bname);
+                                $('#updateform #upusername').val(data.data.username);
+                                $('#updateform #uporder_id').val(data.data.order_id);
+                                $('#updateform #upuid').val(data.data.uid);
+                                $('#updateform #nums').val(data.data.nums);
+                                $('#updateform #price').val(data.data.price);
+                                $('#updateform #total').val(data.data.total);
+                                $('#updateform #uptel').val(data.data.tel);
+                                $('#updateform #upaddress').val(data.data.address);
+                                $('#updateform #gathering').val(data.data.gathering);
+                                $('#updateform #payment').val(data.data.payment);
+                                $('#updateform #pay_hash').val(data.data.pay_hash);
+                                $('#updateform #modes').val(data.data.modeinfo.modes);
+                                $('#updateform #freight').val(data.data.modeinfo.freight);
+                                $('#updateform #lname').val(data.data.modeinfo.lname);
+                                $('#updateform #send_time').val(data.data.modeinfo.send_time);
+                                $('#updateform #pay_time').val(data.data.modeinfo.pay_time);
+                                $('#updateform #msorder').val(data.data.modeinfo.msorder);
+								$('#updateform input[name=receivetime]').val(data.data.receivetime);
+								$("#updateform #selectID option[value='"+data.data.status+"']").attr("selected",true);
+								//$("#updateform #selectID").find("option:text('2')").attr("selected",true);
+								if(data.data.status==0 || data.data.status==1){
+									$("#updateform #status0").show();
+								}
+								if(data.data.status==2 || data.data.status==3){
+									//if(JSON.stringify(data.data.logistics)!='{}'){
+										var strs='';
+										//console.log(data.data.logistics);
+										$.each(data.data.logistics,function(k,v){
+											strs+='<table  class="table table-striped">';
+											strs+='<thead>';
+											strs+='<tr>';
+											strs+='<th>时间：'+v.newtime+'—最新地址：'+v.newaddress+'—收取状态：'+v.newstatus+'—配送公司：'+data.data.modeinfo.lname+'—快递单号：'+data.data.modeinfo.msorder+'</th>';
+											strs+='</tr>';
+											strs+='</thead>';
+											strs+='<tbody>';
+											strs+='</tbody>';
+											strs+='</table>';
+										});
+										
+										$("#updateform #newinfo #table").html(strs);
+									//}
+									$("#updateform #status2").show();
+								}
+                            }
+                        }
+                    });
+                    $("#m-ud-article").modal('show');
+                });
+                grid.find('.btn_delete').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    swal({
+                        title: "你将要删除这个新闻记录吗?",
+                        text: "如果你删除了,将无法恢复!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "delete",
+                        closeOnConfirm: false
+                    }, function(){
+                        $.ajax({
+                            type:"post",
+                            url:"/admin/order/delete",
+                            data:{'id':id},
+                            async:true,
+                            dataType:'json',
+                            beforeSend:function () {
+                                $("#data-table-selection").ajax_loader({size:'pl-lg',color:'pls-green'});
+                            },
+                            complete:function () {
+                                setTimeout(function () {
+                                    $("#data-table-selection").find('.ajax-loader').fadeOut();
+                                },100);
+                            },
+                            success:function (data) {
+                                if(data.code=='0'){
+                                    swal("已删除!", "当前新闻记录已删除.", "success");
+                                    $("#data-table-selection").bootgrid("reload");
+                                }else if(data.code=='3'){
+                                    swal('操作失败','没有权限,请联系管理员!');
+                                }else{
+                                    swal('操作失败');
+                                }
+                            }
+                        })
+
+                    });
+                });
+                grid.find('.btn_search').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    window.open("../order/item?id="+id);
+                })
+            });
+            $("body").on('click',function (e) {
+                if(e.target.className.indexOf('btn-update')>0){
+                    //$('input[name=content]').val(Base64.encode($('#updateContent').summernote('code')));
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            if(data.code=='0'){
+								$("#updateform")[0].reset();
+                                $("#m-ud-article").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='1002'){
+                                swal(data.msg);
+                            }else if(data.code=='3'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#updateform").ajaxSubmit(options);
+                }
+//                m-add-article
+                //打开添加按钮
+                if(e.target.tagName=='BUTTON'||e.target.tagName=='SPAN'){
+                    if(e.target.className.indexOf('btn-add')>0||e.target.parentNode.className.indexOf('btn-add')>0){
+                        $("#m-add-article").modal("show");
+
+                        var $summernote=$('#addContent').summernote({
+                            height: 250,
+                            lang: 'zh-CN',
+                            callbacks: {
+                                onImageUpload: function(files) {
+                                    sendFile($summernote,files[0],articleId);
+                                }
+                            }
+                        });
+                        $("#sl_artType").selectpicker('val',0);
+                        $('#addContent').summernote('code','');
+                    }
+                }
+                //添加按钮
+                if(e.target.className.indexOf('btn-insert')>0){
+                    //$('#hiddenContent').val(Base64.encode($('#updateContent').summernote('code')));
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            $("#addform")[0].reset();
+                            if(data.code=='0'){
+                                $("#m-add-article").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='3'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#addform").ajaxSubmit(options);
+                }
+            })
+        });
+    });
+    function sendFile($summernote,file,artId) {
+        oMyForm = new FormData();
+        oMyForm.append("file", file);
+        if(artId){
+            oMyForm.append("artId",artId);
+        }
+        oMyForm.append("type","1");
+        oMyForm.append("from","2");
+        var fileData = URL.createObjectURL(file);
+        $summernote.summernote('insertImage', fileData,function ($image) {
+            $.ajax({
+                url: "/admin/order/uploadimg",
+                data: oMyForm,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType:"json",
+                type: 'POST',
+                success: function(data){
+		    console.log('img',data);
+                    if(data.code==0) {
+                        $image.attr('src', data.data);
+                    }else if(data.code=='3') {
+                        swal('操作失败', '没有权限,请联系管理员!');
+                    }else {
+                        swal('操作失败');
+                    }
+                }
+            });
+
+        });
+    }
+</script>
+<script language="javascript" type="text/javascript" src="./date/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="./date/My97DatePickerBeta/My97DatePicker/skin/WdatePicker.css"></script>
+<?php include APP_PATH.'/public/admin/footer.html' ?>

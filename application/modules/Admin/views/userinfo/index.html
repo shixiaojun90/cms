@@ -1,0 +1,394 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    <div class="modal fade" id="m-ud-userinfo" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="ModalLabel">
+                        修改用户信息
+                    </h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">用户ID</label>
+                        <label  class="col-sm-8 control-label" id="txt_uid" style="text-align: left;"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputlogin" class="col-sm-3 control-label">用户帐号</label>
+                        <div class="col-sm-8">
+                            <div class="fg-line">
+                                <input type="text" value="" class="form-control input-sm" id="inputlogin" placeholder="用户帐号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-8">
+                            <div class="fg-line">
+                                <input type="password" class="form-control input-sm" id="inputPassword" placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sl_roles" class="col-sm-3 control-label">角色</label>
+                        <div class="col-sm-8">
+                            <select class="selectpicker" id="sl_roles">
+                                <?php foreach($role as $key=>$val){?>
+                                    <option value="<?php echo $val['id'];?>"><?php echo $val['role_name'];?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sl_status" class="col-sm-3 control-label">状态</label>
+                        <div class="col-sm-8">
+                            <select class="selectpicker" id="sl_status">
+                                <option value="0">正常</option>
+                                <option value="1">冻结</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect btn-update">修改</button>
+                    <button type="button"  class="btn btn-default close-modal" data-dismiss="modal">
+                        关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="m-add-userinfo" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        添加用户信息
+                    </h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label for="inputlogin" class="col-sm-3 control-label">用户帐号</label>
+                        <div class="col-sm-8">
+                            <div class="fg-line">
+                                <input type="text" class="form-control input-sm" id="addlogin" placeholder="用户帐号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputlogin" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-8">
+                            <div class="fg-line">
+                                <input type="text" class="form-control input-sm" id="addPassword" placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sl_roles" class="col-sm-3 control-label">角色</label>
+                        <div class="col-sm-8">
+                            <select class="selectpicker" id="add_sl_roles">
+                                <?php foreach($role as $key=>$val){?>
+                                <option value="<?php echo $val['id'];?>"><?php echo $val['role_name'];?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sl_status" class="col-sm-3 control-label">状态</label>
+                        <div class="col-sm-8">
+                            <select class="selectpicker" id="add_sl_status">
+                                <option value="0">正常</option>
+                                <option value="1">冻结</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect btn-insert">添加</button>
+                    <button type="button"  class="btn btn-default close-modal" data-dismiss="modal">
+                        关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <?php include 'updateinfo.html' ?>
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>用户信息 <small>管理所有用户操作.</small></h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="data-table-selection" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th data-column-id="id" data-type="numeric" data-identifier="true">ID</th>
+                            <th data-column-id="login">用户帐号</th>
+                            <th data-column-id="role" data-order="desc">角色</th>
+                            <th data-column-id="status">状态</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+    //全局变量
+    var global_info=JSON.parse('<?php echo $global; ?>');
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','fileinput','sweetAlert','jqueryform'],function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+            var grid=$("#data-table-selection").bootgrid({
+                ajax: true,
+                post: function ()
+                {
+                    /* To accumulate custom parameter with the request object */
+                    return {
+                        id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
+                    };
+                },
+                url: "/admin/userinfo/tabPage",
+                responseHandler:function (data) {
+                    var ret={
+                        "current": data.data.current,
+                        "rowCount": data.data.rowCount,
+                        "rows":data.data.data,
+                        "total": data.data.total
+                    }
+                    return ret;
+                },
+                templates: {
+                    actions: '<div class="actions btn-group"><div class="dropdown btn-group"><button class="btn btn-default btn-add"><span class="zmdi zmdi-account-add zmdi-hc-fw"></span></button></div></div>',
+                    actionButton:'<div class="dropdown btn-group"><button class="btn btn-default"><span class="zmdi zmdi-refresh zmdi-hc-fw"></span></button></div>'
+                },
+                formatters: {
+                    "commands": function(column, row)
+                    {
+                        var btn_edit=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_update\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button>'; }?>");
+
+                        var btn_delete=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_delete\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>'; }?>");
+                        var btn_watch=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_watch\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-account-circle zmdi-hc-fw\"></span></button>'; }?>");
+                        return btn_edit +btn_watch+btn_delete;
+                    }
+                }
+            }).on('loaded.rs.jquery.bootgrid',function () {
+                grid.find('.btn_update').on('click',function (e) {
+                    var target=e.target.tagName=="BUTTON"?$(e.target):$(e.target).parent();
+                    $('#txt_uid').text(target.attr('data-row-id'));
+                    $.ajax({
+                        type:"get",
+                        url:"/admin/userinfo/getUserById",
+                        data:{'uid':target.attr('data-row-id')},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-userinfo").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-userinfo").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#inputlogin").val(data.data.login);
+                                $("#sl_roles").selectpicker('val',data.data.role);
+                                $("#sl_status").selectpicker('val',data.data.status);
+                            }
+                        }
+                    });
+                    $("#m-ud-userinfo").modal('show');
+                });
+                grid.find('.btn_watch').on('click',function (e) {
+                    var target=e.target.tagName=="BUTTON"?$(e.target):$(e.target).parent();
+                    $.ajax({
+                        type:"get",
+                        url:"/admin/userinfo/getUserinfoByUid",
+                        data:{'uid':target.attr('data-row-id')},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-userinfo").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-userinfo").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code=='0'){
+                                if(data.data!=""){
+                                    $("#u_username").val(data.data.user_name);
+                                    $("#u_sex").selectpicker('val',data.data.sex);
+                                    $("#u_balance").val(data.data.balance);
+                                    $("#u_birthday").val(data.data.birthday);
+                                    $("#u_desc").val(data.data.desc);
+                                    $("#m-u-userinfo .fileinput").removeClass('fileinput-new').addClass('fileinput-exists');
+                                    $("#avatar").append('<img src="'+data.data.avatar+'">').css('line-height','150px');
+                                    $("#u_uid").text(data.data.id);
+                                    $("#t_uid").val(data.data.id);
+                                }
+                            }
+                        }
+                    });
+                    $("#m-u-userinfo").modal('show');
+                });
+                grid.find('.btn_delete').on('click',function (e) {
+                    var uid=$(this).attr('data-row-id');
+                    swal({
+                        title: "你将要删除这个用户吗?",
+                        text: "如果你删除了,将无法恢复!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "delete",
+                        closeOnConfirm: false
+                    }, function(){
+                        $.ajax({
+                            type:"post",
+                            url:"/admin/userinfo/delete",
+                            data:{'uid':uid},
+                            async:true,
+                            dataType:'json',
+                            beforeSend:function () {
+                                $("#data-table-selection").ajax_loader({size:'pl-lg',color:'pls-green'});
+                            },
+                            complete:function () {
+                                setTimeout(function () {
+                                    $("#data-table-selection").find('.ajax-loader').fadeOut();
+                                },100);
+                            },
+                            success:function (data) {
+                                if(data.code=='0'){
+                                    swal("已删除!", "当前角色已删除.", "success");
+                                    $("#data-table-selection").bootgrid("reload");
+                                }else if(data.code=='10000'){
+                                    swal('操作失败','没有权限,请联系用户!');
+                                }else{
+                                    swal('操作失败');
+                                }
+                            }
+                        })
+
+                    });
+                });
+            });
+            $("body").on('click',function (e) {
+                if(e.target.className.indexOf('btn-update')>0){
+                    var dt={};
+                    $('#inputlogin').val()?dt['login']=$('#inputlogin').val():'';
+                    $('#sl_roles').val()?dt['role']=$('#sl_roles').val():'';
+                    $('#sl_status').val()?dt['status']=$('#sl_status').val():'';
+                    $('#inputPassword').val()?dt['password']=$('#inputPassword').val():'';
+                    console.log(dt);
+                    $.ajax({
+                        type:"post",
+                        url:"/admin/userinfo/updateUserById",
+                        data:{'uid':$("#txt_uid").text().trim(),'data':dt},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-userinfo").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-userinfo").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-ud-userinfo").modal('hide');
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='10000'){
+                                swal('操作失败','没有权限,请联系用户!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    })
+                }
+                if(e.target.className.indexOf('u-update')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-u-userinfo").find('input[type=file]').val('');
+                                $("#m-u-userinfo").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='10000'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#updateform").ajaxSubmit(options);
+                }
+//                m-add-userinfo
+                //打开添加按钮
+                if(e.target.tagName=='BUTTON'||e.target.tagName=='SPAN'){
+                    if(e.target.className.indexOf('btn-add')>0||e.target.parentNode.className.indexOf('btn-add')>0){
+                        $("#m-add-userinfo").modal("show");
+                    }
+                }
+
+                //添加按钮
+                if(e.target.className.indexOf('btn-insert')>0){
+                    var add_dt={};
+                    add_dt['login']=$('#addlogin').val();
+                    add_dt['password']=$('#addPassword').val();
+                    add_dt['role']=$('#add_sl_roles').val();
+                    add_dt['status']=$('#add_sl_status').val();
+                    $.ajax({
+                        type:"post",
+                        url:"/admin/userinfo/add",
+                        data:{'data':add_dt},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-add-userinfo").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-add-userinfo").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-add-userinfo").modal('hide');
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='10000'){
+                                swal('操作失败','没有权限,请联系用户!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    })
+                }
+            })
+        });
+    });
+</script>
+<?php include APP_PATH.'/public/admin/footer.html' ?>

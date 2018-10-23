@@ -1,0 +1,6 @@
+.text-left{
+    max-width: 200px;
+}
+.table-responsive .bootgrid-table td, .table-responsive .bootgrid-table th>.column-header-anchor>.text{
+    overflow: hidden !important;
+}

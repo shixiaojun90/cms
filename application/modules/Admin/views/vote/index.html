@@ -1,0 +1,214 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+
+    <?php include 'updateinfo.html' ?>
+    <?php include 'add.html' ?>
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+    <section id="content">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>投票项目收录<small>管理所有投票项目等操作.</small></h2>
+                </div>
+                <div class="table-responsive">
+                    <table id="data-table-selection" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th data-column-id="id" data-order="asc" data-type="numeric" data-identifier="true">ID</th>
+                            <th data-column-id="name">项目名称</th>
+                            <th data-column-id="show_img" data-formatter="show_img" data-sortable="false" >图片</th>
+                            <th data-column-id="username" >创建人</th>
+                            <th data-column-id="content" data-formatter="permission">描述</th>
+                            <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+<script>
+    require(['pathCnf'],function (pathCnf) {
+        require(['bootgrid','bootstrapSelect','sweetAlert','summernote-zh','fileinput','jqueryform'],function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 4
+            });
+            var grid=$("#data-table-selection").bootgrid({
+                ajax: true,
+                selection: true,
+                multiSelect: true,
+                rowSelect: true,
+                keepSelection: true,
+                url: "/admin/vote/tabPage",
+                responseHandler:function (data) {
+                    var ret={
+                        "current": data.data.current,
+                        "rowCount": data.data.rowCount,
+                        "rows":data.data.data,
+                        "total": data.data.total
+                    }
+                    return ret;
+                },
+                templates: {
+                    actions: '<div class="actions btn-group"><div class="dropdown btn-group"><button class="btn btn-default btn-add"><span class="zmdi zmdi-account-add zmdi-hc-fw"></span></button></div></div>',
+                    actionButton:'<div class="dropdown btn-group"><button class="btn btn-default"><span class="zmdi zmdi-refresh zmdi-hc-fw"></span></button></div>'
+                },
+                formatters: {
+                    "commands": function(column, row)
+                    {
+                        var btn_edit=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_update\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button>'; }?>");
+
+                        var btn_delete=("<?php if(unserialize($_SESSION['user']['permission'])['is_administortar']==1){ echo '<button type=\"button\" class=\"btn btn-icon bgm-white waves-effect waves-circle btn_delete\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>'; }?>");
+                        return btn_edit+btn_delete;
+                    },
+                    "show_img":function (column,row) {
+                        return '<img class="bootgrid-img" src='+row['show_img']+'>';
+                    }
+                }
+            }).on('loaded.rs.jquery.bootgrid',function () {
+                grid.find('.btn_update').on('click',function (e) {
+                    var target=e.target.tagName=="BUTTON"?$(e.target):$(e.target).parent();
+                    $('#txt_voteId').text(target.attr('data-row-id'));
+                    $.ajax({
+                        type:"get",
+                        url:"/admin/vote/getVoteById",
+                        data:{'id':target.attr('data-row-id')},
+                        async:true,
+                        dataType:'json',
+                        beforeSend:function () {
+                            $("#m-ud-vote").find('.modal-body').ajax_loader({size:'pl-lg',color:'pls-green'});
+                        },
+                        complete:function () {
+                            setTimeout(function () {
+                                $("#m-ud-vote").find('.ajax-loader').fadeOut();
+                            },100);
+                        },
+                        success:function (data) {
+                            if(data.code==0){
+                                $("#updateform .fileinput-preview").html('');
+                                $('#txt_voteId').text(data.data.id);
+                                $('#updateform input[name=id]').val(data.data.id);
+                                $('#inputVoteName').val(data.data.name);
+                                $('#inputVoteContent').val(data.data.content);
+                                $("#updateform .fileinput").removeClass('fileinput-new').addClass('fileinput-exists');
+                                $("#show_img").append('<img src="'+data.data.show_img+'">').css('line-height','150px');
+                            }
+
+                        }
+                    });
+                    $("#m-ud-info").modal('show');
+                });
+                grid.find('.btn_delete').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    swal({
+                        title: "你将要删除这个投票记录吗?",
+                        text: "如果你删除了,将无法恢复!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "delete",
+                        closeOnConfirm: false
+                    }, function(){
+                        $.ajax({
+                            type:"post",
+                            url:"/admin/vote/delete",
+                            data:{'id':id},
+                            async:true,
+                            dataType:'json',
+                            beforeSend:function () {
+                                $("#data-table-selection").ajax_loader({size:'pl-lg',color:'pls-green'});
+                            },
+                            complete:function () {
+                                setTimeout(function () {
+                                    $("#data-table-selection").find('.ajax-loader').fadeOut();
+                                },100);
+                            },
+                            success:function (data) {
+                                if(data.code=='0'){
+                                    swal("已删除!", "当前投票记录已删除.", "success");
+                                    $("#data-table-selection").bootgrid("reload");
+                                }else if(data.code=='3'){
+                                    swal('操作失败','没有权限,请联系管理员!');
+                                }else{
+                                    swal('操作失败');
+                                }
+                            }
+                        })
+
+                    });
+                });
+                grid.find('.btn_search').on('click',function (e) {
+                    var id=$(this).attr('data-row-id');
+                    window.open("../vote/item?id="+id);
+                })
+            });
+            var arr=[];
+            $("input[type=radio]").on('change',function(){
+                $("#data-table-selection").bootgrid("reload");
+            })
+
+
+            $("body").on('click',function (e) {
+
+                if(e.target.className.indexOf('btn-update')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            if(data.code=='0'){
+                                $("#m-ud-info").find('input[type=file]').val('');
+                                $("#m-ud-info").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='3'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#updateform").ajaxSubmit(options);
+                }
+//                m-add-vote
+                //打开添加按钮
+                if(e.target.tagName=='BUTTON'||e.target.tagName=='SPAN'){
+                    if(e.target.className.indexOf('btn-add')>0||e.target.parentNode.className.indexOf('btn-add')>0){
+                        $("#m-add-info").modal("show");
+                    }
+                }
+                if(e.target.tagName=='BUTTON'||e.target.tagName=='SPAN'){
+                    if(e.target.className.indexOf('btn-collection')>0||e.target.parentNode.className.indexOf('btn-collection')>0){
+                        $("#m-collection").modal("show");
+                    }
+                }
+
+                //添加按钮
+                if(e.target.className.indexOf('btn-insert')>0){
+                    var options={
+                        dataType:'json',
+                        success:function (data) {
+                            $("#addform")[0].reset();
+                            if(data.code=='0'){
+                                $("#m-add-info").modal("hide");
+                                $("#data-table-selection").bootgrid("reload");
+                            }else if(data.code=='3'){
+                                swal('操作失败','没有权限,请联系管理员!');
+                            }else{
+                                swal('操作失败');
+                            }
+                        }
+                    };
+                    $("#addform").ajaxSubmit(options);
+                }
+            })
+        });
+    });
+</script>
+<?php include APP_PATH.'/public/admin/footer.html' ?>

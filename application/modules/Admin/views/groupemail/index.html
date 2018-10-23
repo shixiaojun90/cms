@@ -1,0 +1,209 @@
+<?php include APP_PATH.'/public/admin/header_meta.html' ?>
+<?php include APP_PATH.'/public/admin/header.html' ?>
+<section id="main" data-layout="layout-1">
+    
+    <aside id="sidebar" class="sidebar c-overflow toggled">
+        <?php include APP_PATH.'/public/admin/menu_left.html' ?>
+    </aside>
+	<section id="content">
+		<div class="container">
+			<div class="card">
+				<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="#group" data-toggle="tab">邮件群发</a></li>
+						<li><a href="#record" data-toggle="tab">发送失败记录</a></li>
+						
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="group">
+							<form class="form-horizontal" id="addform">
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">发件人</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<input class="form-control" id="fromName" type="text" name="fromName" value="<?php echo $email['fromName'];?>" placeholder="发件人"/>
+									</div>
+								</div>
+								
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">收件人</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<textarea class="form-control" rows="10" id="tomail" type="text" name="tomail" placeholder="收件人"/><?php echo $email['tomails'];?></textarea>
+									</div>
+								</div>
+								<div class="form-group" style="margin-right: 0px;">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">邮件内容</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<textarea class="form-control" rows="10" id="textarea" type="text" name="content" placeholder="邮件内容"/></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group" style="margin-right: 0px;display:none" id="success">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">发送成功的邮件</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<textarea class="form-control" rows="10" id="successemail" type="text"/></textarea>
+									</div>
+								</div>
+								<div class="form-group" style="margin-right: 0px;display:none" id="error">
+									<label class="col-sm-2 control-label" for="ds_host" style="width: 9.666667%;">发送失败的邮件</label>
+									<div class="col-sm-4" style="width: 90%;">
+										<textarea class="form-control" rows="10" id="erroremail" name="resettomail" type="text"/></textarea>
+									</div>
+									<input type="button" id="resubmit" class="btn btn-primary btn-lg btn-insert" style="margin-left: auto;margin-right: auto;float: none;display: block;" value="重新发送">
+								</div>
+							</form>
+							<input type="button" id="submitBtn" class="btn btn-primary btn-lg btn-insert" style="margin-left: auto;margin-right: auto;float: none;display: block;" value="发送">
+						</div>
+						<div class="tab-pane fade" id="record">
+							<div class="table-responsive">
+								<table id="data-table-selection" class="table table-striped">
+									<thead>
+									<tr>
+										<th>编号</th>
+										<th>发件人</th>
+										<th>收件人Email</th>
+										<th>发件内容</th>
+										<th>时间</th>
+										<th>状态</th>
+										<th>操作</th>
+									</tr>
+									<?php 	if(!empty($emailmsg)){
+												foreach($emailmsg as $key => $val){
+												?>
+													<tr id="resend_id_<?php echo $val['id'];?>">
+														<th><?php echo $val['id'];?></th>
+														<th><?php echo $val['fromName'];?></th>
+														<th><?php echo $val['tomail'];?></th>
+														<th><?php echo $val['content'];?></th>
+														<th><?php echo date("Y-m-d H:i:s",$val['c_time']);?></th>
+														<th><?php echo $statusmsg[$val['status']];?></th>
+														<th>
+														<input type="button" id="resend" onclick="resend('<?php echo $val['id'];?>');" style="margin-left: auto;margin-right: auto;float: none;display: block;" value="重新发送">
+														</th>
+													</tr>
+												<?php 
+												}
+											}
+									?>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+					</div>
+			</div>
+		</div>
+	</section>
+    
+</section>
+<script>
+    //批量发送
+    $("#submitBtn").click(function(){
+		var email=$("#email").val();
+		$.ajax({  
+			type: "POST",  
+			url: "/admin/groupemail/sendemail",
+			crossDomain: true, 
+			dataType: "json",
+			data: $("#addform").serialize(),
+			beforeSend: function () {
+				$("#submitBtn").val("正在发送中");
+			},
+			success: function(data){
+				if(data.list.success!="" && data.list.success!=undefined){
+					$("#successemail").text(data.list.success);
+					$("#success").show();
+				}else{
+					$("#successemail").text();
+					$("#success").hide();
+				}
+				
+				if(data.list.error!="" && data.list.error!=undefined){
+					$("#erroremail").text(data.list.error);
+					$("#error").show();
+					$("#submitBtn").hide();
+				}else{
+					$("#erroremail").text();
+					$("#error").hide();
+				}
+			},
+			complete: function () {
+				$("#submitBtn").val("发送");
+			}
+		});
+	})
+	
+	//重新发送
+    $("#resubmit").click(function(){
+		var fromName=$("#fromName").val();
+		var tomail=$("#tomail").val();
+		var textarea=$("#textarea").val();
+		var erroremail=$("#erroremail").val();
+		$.ajax({  
+			type: "POST",  
+			url: "/admin/groupemail/resetsend",
+			crossDomain: true, 
+			dataType: "json",
+			data: {"fromName":fromName,"tomail":erroremail,"content":textarea},
+			beforeSend: function () {
+				$("#resubmit").val("正在发送中");
+			},
+			success: function(data){
+				if(data.list.success!="" && data.list.success!=undefined){
+					$("#successemail").text(data.list.success);
+					$("#success").show();
+				}else{
+					$("#successemail").text();
+					$("#success").hide();
+				}
+				
+				if(data.list.error!="" && data.list.error!=undefined){
+					$("#erroremail").text(data.list.error);
+					$("#error").show();
+					$("#submitBtn").hide();
+				}else{
+					$("#erroremail").text();
+					$("#error").hide();
+				}
+			},
+			complete: function () {
+				$("#resubmit").val("重新发送");
+			}
+		});
+	})
+	
+	
+	//发送失败失败记录重新发送
+	function resend(id){
+		//var eid=$("#resend_id").text();
+		//var fromName=$("#resend_fromName").text();
+		//var tomail=$("#resend_tomail").text();
+		//var content=$("#resend_content").text();
+		$.ajax({  
+			type: "POST",  
+			url: "/admin/groupemail/resend",
+			crossDomain: true, 
+			dataType: "json",
+			data: {"id":id},
+			beforeSend: function () {
+				$("#resend").val("正在发送中");
+			},
+			success: function(data){
+				if(data.code=='success'){
+					//alert("发送成功");
+					$("#resend_id_"+id).remove();
+				}else{
+					//$("#resend_id_"+id).remove();
+					alert("发送失败");
+				}
+			},
+			complete: function () {
+				$("#resend_button").val('<input type="button" id="resend" style="margin-left: auto;margin-right: auto;float: none;display: block;" value="重新发送">');
+			}
+		});
+	}
+    
+</script>
+
+<?php include APP_PATH.'/public/admin/footer.html' ?>
